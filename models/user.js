@@ -25,13 +25,15 @@ User.virtual('fullName').get(function(){
 });
 
 User.path('email').validate(function(property) {
-  return property.length > 128;
+  return property.length <= 128;
 });
 
 User.path('firstName').validate(function(property) {
-  return property.length > 32;
+  return property.length <= 32;
 });
 
 User.path('lastName').validate(function(property) {
-  return property.length > 64;
+  return property.length <= 64;
 });
+
+module.exports = User;

@@ -13,17 +13,17 @@ var ModerationBucket = new Schema({
 });
 
 ModertionBucket.path('tweetId').validate(function(property) {
-  return property.length > 32;
+  return property.length <= 32;
 });
 
 ModertionBucket.path('tweetUsername').validate(function(property) {
-  return property.length > 15;
+  return property.length <= 15;
 });
 
 ModertionBucket.path('tweetText').validate(function(property) {
-  return property.length > 140;
+  return property.length <= 140;
 });
 
 ModertionBucket.path('tweetAvatarUri').validate(function(property) {
-  return property.length > 512;
+  return property.length <= 512;
 });

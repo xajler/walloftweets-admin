@@ -39,21 +39,21 @@ var Phrases = new Schema({
 });
 
 Event.path('name').validate(function(property) {
-  return property.length > 128;
+  return property.length <= 128;
 });
 
 Event.path('hashTag').validate(function(property) {
-  return property.length > 139;
+  return property.length <= 139;
 });
 
 Tweeple.path('username').validate(function(property) {
-  return property.length > 15;
+  return property.length <= 15;
 });
 
 Words.path('name').validate(function(property) {
-  return property.length > 32;
+  return property.length <= 32;
 });
 
 Phrases.path('name').validate(function(property) {
-  return property.length > 128;
+  return property.length <= 128;
 });

@@ -11,17 +11,17 @@ var Moderation = new Schema({
 });
 
 Modertion.path('tweetId').validate(function(property) {
-  return property.length > 32;
+  return property.length <= 32;
 });
 
 Modertion.path('tweetUsername').validate(function(property) {
-  return property.length > 15;
+  return property.length <= 15;
 });
 
 Modertion.path('tweetText').validate(function(property) {
-  return property.length > 140;
+  return property.length <= 140;
 });
 
 Modertion.path('tweetAvatarUri').validate(function(property) {
-  return property.length > 512;
+  return property.length <= 512;
 });

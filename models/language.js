@@ -9,13 +9,13 @@ var Language = new Schema({
 });
 
 Language.path('name').validate(function(property) {
-  return property.length > 32;
+  return property.length <= 32;
 });
 
 Language.path('nativeName').validate(function(property) {
-  return property.length > 32;
+  return property.length <= 32;
 });
 
 Language.path('cultureCode').validate(function(property) {
-  return property.length > 7;
+  return property.length <= 7;
 });
