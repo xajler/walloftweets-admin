@@ -21,9 +21,9 @@ var Client = new Schema({
 });
 
 Client.path('name').validate(function(property) {
-  return property.length > 64;
+  return property.length <= 64;
 });
 
 Client.path('email').validate(function(property) {
-  return property.length > 128;
+  return property.length <= 128;
 });
