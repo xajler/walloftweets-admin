@@ -1,6 +1,18 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
+var Tweeple = new Schema({
+  username: { type: String, required: true }
+});
+
+var Words = new Schema({
+  name: { type: String, required: true }
+});
+
+var Phrases = new Schema({
+  name: { type: String, required: true }
+});
+
 var Event = new Schema({
   name: { type: String, index: true, required: true },
   clientId: { type: ObjectId, index: true, required: true },
@@ -24,18 +36,6 @@ var Event = new Schema({
   whitelistedTweeple: [Tweeple],
   blacklistedTweeple: [Tweeple],
   blacklistedWords: [Words]
-});
-
-var Tweeple = new Schema({
-  username: { type: String, required: true }
-});
-
-var Words = new Schema({
-  name: { type: String, required: true }
-});
-
-var Phrases = new Schema({
-  name: { type: String, required: true }
 });
 
 Event.path('name').validate(function(property) {

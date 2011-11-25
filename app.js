@@ -42,7 +42,8 @@ app.get('/', requiresLogin, function(req, res) {
 
 app.get('/login', function(req, res) {
   res.render('login', {    
-    title: 'Login',
+    title: 'Login', 
+    layout : '',
     locals: {
     redir: req.query.redir }
   });
@@ -55,12 +56,18 @@ app.post('/login', function(req, res) {
       res.redirect(req.body.redir || '/');
     } else {
       res.render('login', {    
-        title: 'Login',
+        title: 'Login', 
+        layout : '',
         locals: {
         redir: req.query.redir }
       });
     }
   });
+});  
+
+app.get('/logout', function(req, res) {
+  delete req.session.user;
+  res.redirect('/login'); 
 });
 
 app.listen(3000);
