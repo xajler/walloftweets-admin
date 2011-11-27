@@ -1,21 +1,27 @@
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+(function() {
+  var Language, Schema, mongoose;
 
-var Language = new Schema({
-  name: String,
-  nativeName: String,
-  cultureCode: String,
-  Position: Number
-});
+  mongoose = require('mongoose');
 
-Language.path('name').validate(function(property) {
-  return property.length <= 32;
-});
+  Schema = mongoose.Schema;
 
-Language.path('nativeName').validate(function(property) {
-  return property.length <= 32;
-});
+  Language = new Schema({
+    name: String,
+    nativeName: String,
+    cultureCode: String,
+    Position: Number
+  });
 
-Language.path('cultureCode').validate(function(property) {
-  return property.length <= 7;
-});
+  Language.path('name').validate(function(property) {
+    return property.length <= 32;
+  });
+
+  Language.path('nativeName').validate(function(property) {
+    return property.length <= 32;
+  });
+
+  Language.path('cultureCode').validate(function(property) {
+    return property.length <= 7;
+  });
+
+}).call(this);

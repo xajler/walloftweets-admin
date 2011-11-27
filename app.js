@@ -1,74 +1,90 @@
-var express = require('express');
-require('express-resource');
+(function() {
+  var app, express, requiresLogin, users;
 
-var app = module.exports = express.createServer();  
-var users = require('./repositories/users');
+  express = require('express');
 
-// Configuration
-app.configure(function(){      
-  app.use(express.logger('dev'));
-  app.set('views', __dirname + '/views');
-  app.use(express.bodyParser()); 
-  app.use(express.cookieParser()); 
-  app.use(express.session({ secret: '~oTU2C"!XI=ZS?^}' }));
-  app.use(express.methodOverride());
-  app.set('view engine', 'jade');
-  app.use(require('stylus').middleware({ src: __dirname + '/public' }));
-  app.use(app.router);  
-  //app.use(messages());
-  app.use(express.static(__dirname + '/public'));
-});
+  require('express-resource');
 
-app.configure('development', function() {
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
-});
+  app = module.exports = express.createServer();
 
-app.configure('production', function() {
-  app.use(express.errorHandler()); 
-}); 
+  users = require('./repositories/users');
 
-function requiresLogin(req, res, next) {
-  if (req.session.user) {
-    next();
-  } else {
-    res.redirect('/login?redir=' + req.url);
-  }
-}
-
-// Routes
-app.get('/', requiresLogin, function(req, res) {
-  res.render('index', { title: 'Express' }); 
-}); 
-
-app.get('/login', function(req, res) {
-  res.render('login', {    
-    title: 'Login', 
-    layout : '',
-    locals: {
-    redir: req.query.redir }
+  app.configure(function() {
+    app.use(express.logger('dev'));
+    app.set('views', __dirname + '/views');
+    app.use(express.bodyParser());
+    app.use(express.cookieParser());
+    app.use(express.session({
+      secret: '~oTU2C"!XI=ZS?^}'
+    }));
+    app.use(express.methodOverride());
+    app.set('view engine', 'jade');
+    app.use(require('stylus').middleware({
+      src: __dirname + '/public'
+    }));
+    app.use(app.router);
+    return app.use(express.static(__dirname + '/public'));
   });
-}); 
 
-app.post('/login', function(req, res) {
-  users.authenticate(req.body.email, req.body.password, function(user) {
-    if (user) {
-      req.session.user = user;
-      res.redirect(req.body.redir || '/');
+  app.configure('development', function() {
+    return app.use(express.errorHandler({
+      dumpExceptions: true,
+      showStack: true
+    }));
+  });
+
+  app.configure('production', function() {
+    return app.use(express.errorHandler());
+  });
+
+  requiresLogin = function(req, res, next) {
+    if (req.session.user) {
+      return next();
     } else {
-      res.render('login', {    
-        title: 'Login', 
-        layout : '',
-        locals: {
-        redir: req.query.redir }
-      });
+      return res.redirect('/login?redir=' + req.url);
     }
+  };
+
+  app.get('/', requiresLogin, function(req, res) {
+    return res.render('index', {
+      title: 'Express'
+    });
   });
-});  
 
-app.get('/logout', function(req, res) {
-  delete req.session.user;
-  res.redirect('/login'); 
-});
+  app.get('/login', function(req, res) {
+    return res.render('login', {
+      title: 'Login',
+      layout: '',
+      locals: {
+        redir: req.query.redir
+      }
+    });
+  });
 
-app.listen(3000);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+  app.post('/login', function(req, res) {
+    return users.authenticate(req.body.email, req.body.password, function(user) {
+      if (user) {
+        req.session.user = user;
+        return res.redirect(req.body.redir || '/');
+      } else {
+        return res.render('login', {
+          title: 'Login',
+          layout: '',
+          locals: {
+            redir: req.query.redir
+          }
+        });
+      }
+    });
+  });
+
+  app.get('/logout', function(req, res) {
+    delete req.session.user;
+    return res.redirect('/login');
+  });
+
+  app.listen(3000);
+
+  console.log('Express server listening on port %d in %s mode', app.address().port, app.settings.env);
+
+}).call(this);

@@ -1,9 +1,13 @@
-var AppRoute = function() { 
-    this.requiresLogin = function(req, res, next) {
+(function() {
+  var AppRoute;
+
+  AppRoute = function() {
+    this.requiresLogin = function(req, res, next) {};
     if (req.session.user) {
-      next();
+      return next();
     } else {
-      res.redirect('/login?redir=' + req.url);
+      return res.redirect('/login?redir=' + req.url);
     }
   };
-};
+
+}).call(this);

@@ -1,59 +1,102 @@
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+(function() {
+  var Event, Phrases, Schema, Tweeple, Words, mongoose;
 
-var Tweeple = new Schema({
-  username: { type: String, required: true }
-});
+  mongoose = require('mongoose');
 
-var Words = new Schema({
-  name: { type: String, required: true }
-});
+  Schema = mongoose.Schema;
 
-var Phrases = new Schema({
-  name: { type: String, required: true }
-});
+  Tweeple = new Schema({
+    username: {
+      type: String,
+      required: true
+    }
+  });
 
-var Event = new Schema({
-  name: { type: String, index: true, required: true },
-  clientId: { type: ObjectId, index: true, required: true },
-  userId: { type: ObjectId, index: true, required: true },
-  hasTag: { type: String, index: true, required: true },
-  downloadInterval: Number,
-  tweetsToShow: Number,
-  screenRefreshInterval: Number,
-  isEnabledForModeration: { type: Boolean, default: true },
-  isEnabledTweetFlow: { type: Boolean, default: true },
-  startDate: Date,
-  endDate: Date,
-  isActive: { type: Boolean, default: true },
-  isDeleted: { type: Boolean, default: false },
-  fromTweeple: [Tweeple],
-  toTweeple: [Tweeple],
-  mentionTweeple: [Tweeple],
-  containAllOfWords: [Words],
-  containAnyOfWords: [Words],
-  containExactPhrases: [Phrases],
-  whitelistedTweeple: [Tweeple],
-  blacklistedTweeple: [Tweeple],
-  blacklistedWords: [Words]
-});
+  Words = new Schema({
+    name: {
+      type: String,
+      required: true
+    }
+  });
 
-Event.path('name').validate(function(property) {
-  return property.length <= 128;
-});
+  Phrases = new Schema({
+    name: {
+      type: String,
+      required: true
+    }
+  });
 
-Event.path('hashTag').validate(function(property) {
-  return property.length <= 139;
-});
+  Event = new Schema({
+    name: {
+      type: String,
+      index: true,
+      required: true
+    },
+    clientId: {
+      type: ObjectId,
+      index: true,
+      required: true
+    },
+    userId: {
+      type: ObjectId,
+      index: true,
+      required: true
+    },
+    hasTag: {
+      type: String,
+      index: true,
+      required: true
+    },
+    downloadInterval: Number,
+    tweetsToShow: Number,
+    screenRefreshInterval: Number,
+    isEnabledForModeration: {
+      type: Boolean,
+      "default": true
+    },
+    isEnabledTweetFlow: {
+      type: Boolean,
+      "default": true
+    },
+    startDate: Date,
+    endDate: Date,
+    isActive: {
+      type: Boolean,
+      "default": true
+    },
+    isDeleted: {
+      type: Boolean,
+      "default": false
+    },
+    fromTweeple: [Tweeple],
+    toTweeple: [Tweeple],
+    mentionTweeple: [Tweeple],
+    containAllOfWords: [Words],
+    containAnyOfWords: [Words],
+    containExactPhrases: [Phrases],
+    whitelistedTweeple: [Tweeple],
+    blacklistedTweeple: [Tweeple],
+    blacklistedWords: [Words]
+  });
 
-Tweeple.path('username').validate(function(property) {
-  return property.length <= 15;
-});
+  Event.path('name').validate(function(property) {
+    return property.length <= 128;
+  });
 
-Words.path('name').validate(function(property) {
-  return property.length <= 32;
-});
+  Event.path('hashTag').validate(function(property) {
+    return property.length <= 139;
+  });
 
-Phrases.path('name').validate(function(property) {
-  return property.length <= 128;
-});
+  Tweeple.path('username').validate(function(property) {
+    return property.length <= 15;
+  });
+
+  Words.path('name').validate(function(property) {
+    return property.length <= 32;
+  });
+
+  Phrases.path('name').validate(function(property) {
+    return property.length <= 128;
+  });
+
+}).call(this);
