@@ -1,5 +1,5 @@
 (function() {
-  var app, express, requiresLogin, users;
+  var app, express, users;
 
   express = require('express');
 
@@ -37,18 +37,14 @@
     return app.use(express.errorHandler());
   });
 
-  requiresLogin = function(req, res, next) {
+  require('./routes')(app);
+
+  app.get('/', function(req, res) {
     if (req.session.user) {
-      return next();
+      return res.redirect('/events');
     } else {
       return res.redirect('/login?redir=' + req.url);
     }
-  };
-
-  app.get('/', requiresLogin, function(req, res) {
-    return res.render('index', {
-      title: 'Express'
-    });
   });
 
   app.get('/login', function(req, res) {
@@ -65,7 +61,7 @@
     return users.authenticate(req.body.email, req.body.password, function(user) {
       if (user) {
         req.session.user = user;
-        return res.redirect(req.body.redir || '/');
+        return res.redirect(req.body.redir || '/events');
       } else {
         return res.render('login', {
           title: 'Login',

@@ -24,12 +24,11 @@ app.configure 'development', ->
 app.configure 'production', ->
   app.use express.errorHandler() 
 
-requiresLogin = (req, res, next) ->
-    if req.session.user then next() else res.redirect('/login?redir=' + req.url)  
-
 # Routes
-app.get '/', requiresLogin, (req, res) ->
-  res.render 'index', { title: 'Express' }
+require('./routes')(app)  
+
+app.get '/', (req, res) ->  
+  if req.session.user then res.redirect('/events') else res.redirect('/login?redir=' + req.url) 
 
 app.get '/login', (req, res) ->
   res.render 'login'
@@ -42,7 +41,7 @@ app.post '/login', (req, res) ->
   users.authenticate req.body.email, req.body.password, (user) ->
     if user
       req.session.user = user
-      res.redirect(req.body.redir || '/')
+      res.redirect(req.body.redir || '/events')
     else
       res.render 'login'
         title: 'Login'

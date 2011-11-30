@@ -2,13 +2,17 @@
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css') 
-    script(src='/javascripts/vendor/jquery.min.js')  //- v1.7.2pre
-    script(src='/javascripts/vendor/underscore.js')  //- v1.2.2
-    script(src='/javascripts/vendor/backbone.js')    //- v0.5.3
+    link(rel='stylesheet', href='/stylesheets/style.css')
   body
     #header
       #logout
         a(href='/logout', title='Logout the user from application') Logout
     #nav
-    #container!= body
+    #container!= body  
+    
+    script(src='/javascripts/vendor/jquery.min.js')  //- v1.7.2pre
+    script(src='/javascripts/vendor/underscore.js')  //- v1.2.2
+    script(src='/javascripts/vendor/backbone.js')    //- v0.5.3 
+    
+    - if (title != '')
+      script(src='/javascripts/' + title.toLowerCase() +'.js')
