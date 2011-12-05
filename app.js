@@ -19,9 +19,6 @@
     }));
     app.use(express.methodOverride());
     app.set('view engine', 'jade');
-    app.use(require('stylus').middleware({
-      src: __dirname + '/public'
-    }));
     app.use(app.router);
     return app.use(express.static(__dirname + '/public'));
   });
@@ -48,6 +45,7 @@
   });
 
   app.get('/login', function(req, res) {
+    console.log('going to events');
     return res.render('login', {
       title: 'Login',
       layout: '',

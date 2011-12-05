@@ -23,7 +23,7 @@ authenticate = (email, password, callback) ->
     callback null
 
 save = (user) ->
-  console.log user
+  # console.log user
   user.save (err) ->
     if err then throw err else console.log 'User saved!'
 

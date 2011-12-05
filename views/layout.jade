@@ -1,18 +1,48 @@
 !!!  5
 html
   head
-    title= title
+    title= title + ' :: UX Passion :: Wall OF Tweets Administration'
+    meta(name='description', content='')
+    meta(name='author', content='')
+    meta(name='viewport', content='width=device-width,initial-scale=1')
+
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='javascripts/lib/jquery/jquery-min.js')    
+    script(data-main='javascripts/main', src='javascripts/lib/require/require.js')    
+    script
+      jQuery(function() { 
+        console.log('Loading path ' + window.location.pathname); 
+        switch(window.location.pathname) {
+          case '/events':
+            console.log('Events Menu');
+            $('#events').addClass('active');
+            break;
+          default:
+            console.log('Huston, we have a problem!');
+        }
+      });
   body
     #header
       #logout
+        img(src='images/logo.png', align='left', alt='logo image', title='UX Passion Wall Of Tweets')
+        a(href='/', title='')= currentUserFullName
+        span.linkSeparator\ | 
         a(href='/logout', title='Logout the user from application') Logout
     #nav
-    #container!= body  
+      ul.button-list
+        li
+          a(id='events', href='/events', class='button') Events
+        li
+          a(id='moderation', href='/moderation', class='button') Moderation
+        li
+          a(id='phrases', href='/phrases', class='button') Phrases
+        li  
+          a(id='tweeple', href='/tweeple', class='button') Tweeple 
+
+    #content!= body  
     
-    script(src='/javascripts/vendor/jquery.min.js')  //- v1.7.2pre
-    script(src='/javascripts/vendor/underscore.js')  //- v1.2.2
-    script(src='/javascripts/vendor/backbone.js')    //- v0.5.3 
-    
-    - if (title != '')
-      script(src='/javascripts/' + title.toLowerCase() +'.js')
+    #footer
+      a(href='http://www.uxpassion.com', title='UX Passion offical site') UX Passion
+      span.linkSeparator\ ::  
+      a(href='http://www.walloftweets.net', title='UX Passion "Wall Of Tweets" offical site') Wall Of Tweets
+      span.linkSeparator\ &copy; 2012

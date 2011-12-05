@@ -2,16 +2,31 @@
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    h1 Login
-    form(action='/login', method='POST')
-      input(type='hidden', name='redir', value=redir)
-      p
-        label(for='email') Email:
-        input(type='text', name='email', id='email')
-      p
-        label(for='password') Password:
-        input(type='password', name='password', id='password')
-      p
-        input(type='submit', value="Login")   
+    link(rel='stylesheet', href='/stylesheets/login.css')
+  body   
+    #container
+      form(action='/login', method='POST') 
+        h3 
+          span Wall Of Tweets
+        fieldset
+          legend        
+          input(type='hidden', name='redir', value=redir)
+          p.first
+            label(for='email') Email:
+            input(type='text', name='email', id='email')
+          p
+            label(for='password') Password:
+            input(type='password', name='password', id='password')
+          p.submit
+            button(type='submit') Login 
+      
+      script
+        window.onload = function () { 
+          document.forms[0].email.value = 'xajler@gmail.com';
+          if (document.forms[0].email.value == "") {
+            document.forms[0].email.focus();
+          }
+          else {
+             document.forms[0].password.focus();
+          }  
+        };

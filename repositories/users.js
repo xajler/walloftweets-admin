@@ -35,7 +35,6 @@
   };
 
   save = function(user) {
-    console.log(user);
     return user.save(function(err) {
       if (err) {
         throw err;

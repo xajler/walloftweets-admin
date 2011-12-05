@@ -13,7 +13,7 @@ app.configure ->
   app.use express.session({ secret: '~oTU2C"!XI=ZS?^}' })
   app.use express.methodOverride()
   app.set 'view engine', 'jade'
-  app.use require('stylus').middleware({ src: __dirname + '/public' })
+  #app.use require('stylus').middleware({ src: __dirname + '/public' })
   app.use app.router
   # app.use messages()
   app.use express.static(__dirname + '/public')
@@ -30,7 +30,8 @@ require('./routes')(app)
 app.get '/', (req, res) ->  
   if req.session.user then res.redirect('/events') else res.redirect('/login?redir=' + req.url) 
 
-app.get '/login', (req, res) ->
+app.get '/login', (req, res) -> 
+  console.log('going to events')
   res.render 'login'
     title: 'Login'
     layout : ''
