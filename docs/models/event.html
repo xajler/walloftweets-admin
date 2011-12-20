@@ -1,0 +1,145 @@
+<!DOCTYPE html><html><head><title>event.coffee</title><meta http-equiv="Content-Type" content="text/html" charset="UTF-8"><link rel="stylesheet" media="all" href="../docco.css"></head><body><div id="container"><div id="background"></div><div id="jump_to">Jump To &hellip;<div id="jump_wrapper"><div id="jump_page"><a href="../readme.html" class="source"><span class="file_name">README</span></a><a href=".././app.html" class="source "><span class="base_path">. / </span><span class="file_name">app.coffee</span></a><a href="../models/client.html" class="source "><span class="base_path">models / </span><span class="file_name">client.coffee</span></a><a href="../models/event.html" class="source selected"><span class="base_path">models / </span><span class="file_name">event.coffee</span></a><a href="../models/language.html" class="source "><span class="base_path">models / </span><span class="file_name">language.coffee</span></a><a href="../models/moderation-bucket.html" class="source "><span class="base_path">models / </span><span class="file_name">moderation-bucket.coffee</span></a><a href="../models/moderation.html" class="source "><span class="base_path">models / </span><span class="file_name">moderation.coffee</span></a><a href="../models/user.html" class="source "><span class="base_path">models / </span><span class="file_name">user.coffee</span></a><a href=".././mongoose-init.html" class="source "><span class="base_path">. / </span><span class="file_name">mongoose-init.coffee</span></a><a href="../repositories/users.html" class="source "><span class="base_path">repositories / </span><span class="file_name">users.coffee</span></a><a href="../utils/auth.html" class="source "><span class="base_path">utils / </span><span class="file_name">auth.coffee</span></a></div></div></div><table cellpadding="0" cellspacing="0"><thead><tr><th class="docs"><h1>event.coffee</h1><div class="filepath">models/</div></th><th class="code"></th></tr></thead><tbody><tr id="section-1"><td class="docs"><div class="pilwrap"><a href="#section-1" class="pilcrow">&#182;</a></div><h3>Requires</h3>
+
+<ul>
+<li>The MongoDB ODM driver <strong>Mongoose</strong>.</li>
+<li><strong>Mongoose</strong> <code>Schema</code>.</li>
+</ul>
+</td><td class="code"><div class="highlight"><pre><span class="nv">mongoose = </span><span class="nx">require</span> <span class="s1">&#39;mongoose&#39;</span>
+<span class="nv">Schema = </span><span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span></pre></div></td></tr><tr id="section-2"><td class="docs"><div class="pilwrap"><a href="#section-2" class="pilcrow">&#182;</a></div><h3>Tweeple</h3>
+
+<p>The new Mongoose <code>Schema</code> of Wall Of Tweets Event Tweeple model.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">Tweeple = </span><span class="k">new</span> <span class="nx">Schema</span><span class="p">(</span></pre></div></td></tr><tr id="section-3"><td class="docs"><div class="pilwrap"><a href="#section-3" class="pilcrow">&#182;</a></div><h3>username</h3>
+
+<p><code>String</code> type, required.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">username:</span>
+    <span class="nv">type: </span><span class="nb">String</span> 
+    <span class="nv">required: </span><span class="kc">true</span>
+<span class="p">)</span></pre></div></td></tr><tr id="section-4"><td class="docs"><div class="pilwrap"><a href="#section-4" class="pilcrow">&#182;</a></div><h3>Words</h3>
+
+<p>The new Mongoose <code>Schema</code> of Wall Of Tweets Event Words model.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">Words = </span><span class="k">new</span> <span class="nx">Schema</span><span class="p">(</span></pre></div></td></tr><tr id="section-5"><td class="docs"><div class="pilwrap"><a href="#section-5" class="pilcrow">&#182;</a></div><h3>name</h3>
+
+<p><code>String</code> type, required.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">name:</span>
+    <span class="nv">type: </span><span class="nb">String</span><span class="p">,</span> 
+    <span class="nv">required: </span><span class="kc">true</span>
+<span class="p">)</span></pre></div></td></tr><tr id="section-6"><td class="docs"><div class="pilwrap"><a href="#section-6" class="pilcrow">&#182;</a></div><h3>Phrases</h3>
+
+<p>The new Mongoose <code>Schema</code> of Wall Of Tweets Event Phrases model.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">Phrases = </span><span class="k">new</span> <span class="nx">Schema</span><span class="p">(</span></pre></div></td></tr><tr id="section-7"><td class="docs"><div class="pilwrap"><a href="#section-7" class="pilcrow">&#182;</a></div><h3>name</h3>
+
+<p><code>String</code> type, required.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">name: </span>
+    <span class="nv">type: </span><span class="nb">String</span>
+    <span class="nv">required: </span><span class="kc">true</span>
+<span class="p">)</span></pre></div></td></tr><tr id="section-8"><td class="docs"><div class="pilwrap"><a href="#section-8" class="pilcrow">&#182;</a></div><h3>Event</h3>
+
+<p>The new Mongoose <code>Schema</code> of Wall Of Tweets Event model.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">Event = </span><span class="k">new</span> <span class="nx">Schema</span><span class="p">(</span></pre></div></td></tr><tr id="section-9"><td class="docs"><div class="pilwrap"><a href="#section-9" class="pilcrow">&#182;</a></div><h3>name</h3>
+
+<p><code>String</code> type, required, MongoDB index.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">name:</span>
+    <span class="nv">type: </span><span class="nb">String</span>
+    <span class="nv">index: </span><span class="kc">true</span>
+    <span class="nv">required: </span><span class="kc">true</span></pre></div></td></tr><tr id="section-10"><td class="docs"><div class="pilwrap"><a href="#section-10" class="pilcrow">&#182;</a></div><h3>clientId</h3>
+
+<p>Refernce to <code>Client</code> schema model. 
+<code>ObjectId</code> type, required, MongoDB index.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">clientId:</span>
+    <span class="nv">type: </span><span class="nx">ObjectId</span>
+    <span class="nv">index: </span><span class="kc">true</span>
+    <span class="nv">required: </span><span class="kc">true</span></pre></div></td></tr><tr id="section-11"><td class="docs"><div class="pilwrap"><a href="#section-11" class="pilcrow">&#182;</a></div><h3>userId</h3>
+
+<p>Refernce to <code>User</code> schema model. 
+<code>ObjectId</code> type, required, MongoDB index.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">userId:</span>
+    <span class="nv">type: </span><span class="nx">ObjectId</span>
+    <span class="nv">index: </span><span class="kc">true</span>
+    <span class="nv">required: </span><span class="kc">true</span></pre></div></td></tr><tr id="section-12"><td class="docs"><div class="pilwrap"><a href="#section-12" class="pilcrow">&#182;</a></div><h3>hasTag</h3>
+
+<p><code>Event</code> Twitter Hash (#) Tag.
+<code>String</code> type, required.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">hashTag:</span>
+    <span class="nv">type: </span><span class="nb">String</span>
+    <span class="nv">index: </span><span class="kc">true</span>
+    <span class="nv">required: </span><span class="kc">true</span></pre></div></td></tr><tr id="section-13"><td class="docs"><div class="pilwrap"><a href="#section-13" class="pilcrow">&#182;</a></div><h3>downloadInterval</h3>
+
+<p>Interval in which tweets will be downloaded from Twitter API.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">downloadInterval: </span><span class="nb">Number</span></pre></div></td></tr><tr id="section-14"><td class="docs"><div class="pilwrap"><a href="#section-14" class="pilcrow">&#182;</a></div><h3>tweetsToShow</h3>
+
+<p>The number of tweets shown on the wall.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">tweetsToShow: </span><span class="nb">Number</span></pre></div></td></tr><tr id="section-15"><td class="docs"><div class="pilwrap"><a href="#section-15" class="pilcrow">&#182;</a></div><h3>screenRefreshInterval</h3>
+
+<p>??????????</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">screenRefreshInterval: </span><span class="nb">Number</span></pre></div></td></tr><tr id="section-16"><td class="docs"><div class="pilwrap"><a href="#section-16" class="pilcrow">&#182;</a></div><h4>isEnabledForModeration</h4>
+
+<p>Does Event need Moderation?
+<code>Boolean</code> type, Set to <code>true</code> as default value.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">isEnabledForModeration:</span>
+    <span class="nv">type: </span><span class="nb">Boolean</span>
+    <span class="nv">default: </span><span class="kc">true</span></pre></div></td></tr><tr id="section-17"><td class="docs"><div class="pilwrap"><a href="#section-17" class="pilcrow">&#182;</a></div><h4>isEnabledTweetFlow</h4>
+
+<p><code>Boolean</code> type, Set to <code>true</code> as default value.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">isEnabledTweetFlow:</span>
+    <span class="nv">type: </span><span class="nb">Boolean</span>
+    <span class="nv">default: </span><span class="kc">true</span></pre></div></td></tr><tr id="section-18"><td class="docs"><div class="pilwrap"><a href="#section-18" class="pilcrow">&#182;</a></div><h3>startDate</h3>
+
+<p>Event start date.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">startDate: </span><span class="nb">Date</span></pre></div></td></tr><tr id="section-19"><td class="docs"><div class="pilwrap"><a href="#section-19" class="pilcrow">&#182;</a></div><h3>endDate</h3>
+
+<p>Event end date.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">endDate: </span><span class="nb">Date</span></pre></div></td></tr><tr id="section-20"><td class="docs"><div class="pilwrap"><a href="#section-20" class="pilcrow">&#182;</a></div><h3>isActive</h3>
+
+<p><code>Boolean</code> type, Set to <code>true</code> as default value.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">isActive:</span>
+    <span class="nv">type: </span><span class="nb">Boolean</span>
+    <span class="nv">default: </span><span class="kc">true</span></pre></div></td></tr><tr id="section-21"><td class="docs"><div class="pilwrap"><a href="#section-21" class="pilcrow">&#182;</a></div><h3>isDeleted</h3>
+
+<p><code>Boolean</code> type, Set to <code>false</code> as default value.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">isDeleted:</span>
+    <span class="nv">type: </span><span class="nb">Boolean</span>
+    <span class="nv">default: </span><span class="kc">false</span></pre></div></td></tr><tr id="section-22"><td class="docs"><div class="pilwrap"><a href="#section-22" class="pilcrow">&#182;</a></div><h3>fromTweeple</h3>
+
+<p>Event collection of tweets of from tweeple.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">fromTweeple: </span><span class="p">[</span><span class="nx">Tweeple</span><span class="p">],</span></pre></div></td></tr><tr id="section-23"><td class="docs"><div class="pilwrap"><a href="#section-23" class="pilcrow">&#182;</a></div><h3>toTweeple</h3>
+
+<p>Event collection of tweets of to tweeple.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">toTweeple: </span><span class="p">[</span><span class="nx">Tweeple</span><span class="p">],</span></pre></div></td></tr><tr id="section-24"><td class="docs"><div class="pilwrap"><a href="#section-24" class="pilcrow">&#182;</a></div><h3>mentionTweeple</h3>
+
+<p>Event collection of tweets of mention tweeple.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">mentionTweeple: </span><span class="p">[</span><span class="nx">Tweeple</span><span class="p">],</span></pre></div></td></tr><tr id="section-25"><td class="docs"><div class="pilwrap"><a href="#section-25" class="pilcrow">&#182;</a></div><h3>containAllOfWords</h3>
+
+<p>Event collection of tweets that contains all of the words.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">containAllOfWords: </span><span class="p">[</span><span class="nx">Words</span><span class="p">],</span></pre></div></td></tr><tr id="section-26"><td class="docs"><div class="pilwrap"><a href="#section-26" class="pilcrow">&#182;</a></div><h3>containAnyOfWords</h3>
+
+<p>Event collection of tweets that contains any of the words.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">containAnyOfWords: </span><span class="p">[</span><span class="nx">Words</span><span class="p">],</span></pre></div></td></tr><tr id="section-27"><td class="docs"><div class="pilwrap"><a href="#section-27" class="pilcrow">&#182;</a></div><h3>containExactPhrases</h3>
+
+<p>Event collection of tweets that contains exact phrases.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">containExactPhrases: </span><span class="p">[</span><span class="nx">Phrases</span><span class="p">],</span></pre></div></td></tr><tr id="section-28"><td class="docs"><div class="pilwrap"><a href="#section-28" class="pilcrow">&#182;</a></div><h3>whitelistedTweeple</h3>
+
+<p>Event collection of whitelisted tweeple that are not going into <code>Moderation</code>.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">whitelistedTweeple: </span><span class="p">[</span><span class="nx">Tweeple</span><span class="p">],</span></pre></div></td></tr><tr id="section-29"><td class="docs"><div class="pilwrap"><a href="#section-29" class="pilcrow">&#182;</a></div><h3>blacklistedTweeple</h3>
+
+<p>Event collection of blacklisted tweeple.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">blacklistedTweeple: </span><span class="p">[</span><span class="nx">Tweeple</span><span class="p">],</span></pre></div></td></tr><tr id="section-30"><td class="docs"><div class="pilwrap"><a href="#section-30" class="pilcrow">&#182;</a></div><h3>blacklistedTweeple</h3>
+
+<p>Event collection of blacklisted words.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">blacklistedWords: </span><span class="p">[</span><span class="nx">Words</span><span class="p">]</span>
+<span class="p">)</span></pre></div></td></tr><tr id="section-31"><td class="docs"><div class="pilwrap"><a href="#section-31" class="pilcrow">&#182;</a></div><p>Validates that Event <code>name</code> is 128 characters long.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">Event</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">).</span><span class="nx">validate</span> <span class="nf">(property) -&gt;</span>
+  <span class="nx">property</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">128</span><span class="p">;</span></pre></div></td></tr><tr id="section-32"><td class="docs"><div class="pilwrap"><a href="#section-32" class="pilcrow">&#182;</a></div><p>Validates that Event <code>hashTag</code> is 139 characters long.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">Event</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;hashTag&#39;</span><span class="p">).</span><span class="nx">validate</span> <span class="nf">(property) -&gt;</span>
+  <span class="nx">property</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">139</span><span class="p">;</span></pre></div></td></tr><tr id="section-33"><td class="docs"><div class="pilwrap"><a href="#section-33" class="pilcrow">&#182;</a></div><p>Validates that Tweeple <code>username</code> is 15 characters long.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">Tweeple</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">).</span><span class="nx">validate</span> <span class="nf">(property) -&gt;</span>
+  <span class="nx">property</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">15</span><span class="p">;</span></pre></div></td></tr><tr id="section-34"><td class="docs"><div class="pilwrap"><a href="#section-34" class="pilcrow">&#182;</a></div><p>Validates that Words <code>name</code> is 32 characters long.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">Words</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">).</span><span class="nx">validate</span> <span class="nf">(property) -&gt;</span>
+  <span class="nx">property</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">32</span><span class="p">;</span></pre></div></td></tr><tr id="section-35"><td class="docs"><div class="pilwrap"><a href="#section-35" class="pilcrow">&#182;</a></div><p>Validates that Phrases <code>name</code> is 128 characters long.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">Phrases</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">).</span><span class="nx">validate</span> <span class="nf">(property) -&gt;</span>
+  <span class="nx">property</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">128</span><span class="p">;</span></pre></div></td></tr><tr id="section-36"><td class="docs"><div class="pilwrap"><a href="#section-36" class="pilcrow">&#182;</a></div><p>Exports <code>Tweeple</code> as module.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">module.exports = </span><span class="nx">Tweeple</span></pre></div></td></tr><tr id="section-37"><td class="docs"><div class="pilwrap"><a href="#section-37" class="pilcrow">&#182;</a></div><p>Exports <code>Words</code> as module.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">module.exports = </span><span class="nx">Words</span></pre></div></td></tr><tr id="section-38"><td class="docs"><div class="pilwrap"><a href="#section-38" class="pilcrow">&#182;</a></div><p>Exports <code>Phrases</code> as module.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">module.exports = </span><span class="nx">Phrases</span></pre></div></td></tr><tr id="section-39"><td class="docs"><div class="pilwrap"><a href="#section-39" class="pilcrow">&#182;</a></div><p>Exports <code>Event</code> as module.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">module.exports = </span><span class="nx">Event</span>
+
+</pre></div></td></tr></tbody></table><div id="generated">generated Tue Dec 20 2011 13:41:24 GMT+0100 (CET)  </div><div id="projectname"><a href="../readme.html">Wall Of Tweets</a></div></div></body></html>

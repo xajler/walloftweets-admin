@@ -1,56 +1,51 @@
-var Sha256 = require('./sha256');
+(function() {
+  var Auth, Sha256, generateSalt, getRandomNumber;
 
-var Auth = function Auth() { 
-  this.salt = null;
-  this.hashPassword = null; 
-  
-  function create(password) { 
-    if (!password) throw 'The password should be given';
-    
-    this.salt = generateSalt();
-    this.hashPassword = Sha256.hash(this.salt + password);
-  }
-  
-  function validate(password, salt, hashPassword) {
-    if (!password || !salt || !hashPassword) return false;
-    
-    var hashedPassword =  Sha256.hash(salt + password);
-    
-    if (hashPassword === hashedPassword)
-      return true;
-      
-    return false;
-  } 
-  
-  function generateSalt() {
-      var length = 8;
-      var salt = "";
+  Sha256 = require('./sha256');
 
-      for (i=0; i < length; i++) {
-          num = getRandomNum();
-          salt += String.fromCharCode(num);
-      }
-
-      return salt;
-  }
-  
-  function getRandomNum() {
-      // between 0 - 1
-      var rndNum = Math.random();
-
-      // rndNum from 0 - 1000
-      rndNum = parseInt(rndNum * 1000, 10);
-
-      // rndNum from 33 - 127
-      rndNum = (rndNum % 94) + 33;
-
-      return rndNum;
-  }
-  
-  return {             
-    create : create,
-    validate: validate
+  Auth = function() {
+    var create, validate;
+    this.salt = null;
+    this.hashPassword = null;
+    create = function(password) {
+      if (!password) throw 'The password should be given';
+      this.salt = generateSalt();
+      return this.hashPassword = Sha256.hash(this.salt + password);
+    };
+    validate = function(password, salt, hashPassword) {
+      var hashedPassword, result;
+      if (!(password || salt || hashPassword)) return false;
+      result = false;
+      hashedPassword = Sha256.hash(salt + password);
+      if (hashPassword === hashedPassword) result = true;
+      return result;
+    };
+    return {
+      create: create,
+      validate: validate
+    };
   };
-};
 
-module.exports = Auth;
+  generateSalt = function() {
+    var length, n, randomNumber, salt, _i, _len;
+    length = 8;
+    salt = "";
+    for (_i = 0, _len = length.length; _i < _len; _i++) {
+      n = length[_i];
+      randomNumber = getRandomNumber();
+      salt += String.fromCharCode(randomNumber);
+    }
+    return salt;
+  };
+
+  getRandomNumber = function() {
+    var randomNumber;
+    randomNumber = Math.random();
+    randomNumber = parseInt(randomNumber * 1000, 10);
+    randomNumber = (randomNumber % 94) + 33;
+    return randomNumber;
+  };
+
+  module.exports = Auth;
+
+}).call(this);

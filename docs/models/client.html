@@ -1,0 +1,63 @@
+<!DOCTYPE html><html><head><title>client.coffee</title><meta http-equiv="Content-Type" content="text/html" charset="UTF-8"><link rel="stylesheet" media="all" href="../docco.css"></head><body><div id="container"><div id="background"></div><div id="jump_to">Jump To &hellip;<div id="jump_wrapper"><div id="jump_page"><a href="../readme.html" class="source"><span class="file_name">README</span></a><a href=".././app.html" class="source "><span class="base_path">. / </span><span class="file_name">app.coffee</span></a><a href="../models/client.html" class="source selected"><span class="base_path">models / </span><span class="file_name">client.coffee</span></a><a href="../models/event.html" class="source "><span class="base_path">models / </span><span class="file_name">event.coffee</span></a><a href="../models/language.html" class="source "><span class="base_path">models / </span><span class="file_name">language.coffee</span></a><a href="../models/moderation-bucket.html" class="source "><span class="base_path">models / </span><span class="file_name">moderation-bucket.coffee</span></a><a href="../models/moderation.html" class="source "><span class="base_path">models / </span><span class="file_name">moderation.coffee</span></a><a href="../models/user.html" class="source "><span class="base_path">models / </span><span class="file_name">user.coffee</span></a><a href=".././mongoose-init.html" class="source "><span class="base_path">. / </span><span class="file_name">mongoose-init.coffee</span></a><a href="../repositories/users.html" class="source "><span class="base_path">repositories / </span><span class="file_name">users.coffee</span></a><a href="../utils/auth.html" class="source "><span class="base_path">utils / </span><span class="file_name">auth.coffee</span></a></div></div></div><table cellpadding="0" cellspacing="0"><thead><tr><th class="docs"><h1>client.coffee</h1><div class="filepath">models/</div></th><th class="code"></th></tr></thead><tbody><tr id="section-1"><td class="docs"><div class="pilwrap"><a href="#section-1" class="pilcrow">&#182;</a></div><h3>Requires</h3>
+
+<ul>
+<li>The MongoDB ODM driver <strong>Mongoose</strong>.</li>
+<li><strong>Mongoose</strong> <code>Schema</code>.</li>
+</ul>
+</td><td class="code"><div class="highlight"><pre><span class="nv">mongoose = </span><span class="nx">require</span> <span class="s1">&#39;mongoose&#39;</span>
+<span class="nv">Schema = </span><span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span></pre></div></td></tr><tr id="section-2"><td class="docs"><div class="pilwrap"><a href="#section-2" class="pilcrow">&#182;</a></div><h3>Client</h3>
+
+<p>The new Mongoose <code>Schema</code> of Wall Of Tweets Client model.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">Client = </span><span class="k">new</span> <span class="nx">Schema</span><span class="p">(</span></pre></div></td></tr><tr id="section-3"><td class="docs"><div class="pilwrap"><a href="#section-3" class="pilcrow">&#182;</a></div><h3>name</h3>
+
+<p><code>String</code> type, required, MongoDB index.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">name:</span>
+    <span class="nv">type: </span><span class="nb">String</span>
+    <span class="nv">index: </span><span class="kc">true</span>
+    <span class="nv">required: </span><span class="kc">true</span></pre></div></td></tr><tr id="section-4"><td class="docs"><div class="pilwrap"><a href="#section-4" class="pilcrow">&#182;</a></div><h3>email</h3>
+
+<p><code>String</code> type, required, Unique MongoDB index.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">email:</span>
+    <span class="nv">type: </span><span class="nb">String</span>
+    <span class="nv">required: </span><span class="kc">true</span>
+    <span class="nv">index: </span>
+      <span class="nv">unique: </span><span class="kc">true</span>
+    <span class="nv">validate: </span><span class="sr">/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/</span></pre></div></td></tr><tr id="section-5"><td class="docs"><div class="pilwrap"><a href="#section-5" class="pilcrow">&#182;</a></div><h3>contactPersonName</h3>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">contactPersonName: </span><span class="nb">String</span></pre></div></td></tr><tr id="section-6"><td class="docs"><div class="pilwrap"><a href="#section-6" class="pilcrow">&#182;</a></div><h3>address</h3>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">address: </span><span class="nb">String</span></pre></div></td></tr><tr id="section-7"><td class="docs"><div class="pilwrap"><a href="#section-7" class="pilcrow">&#182;</a></div><h3>country</h3>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">country: </span><span class="nb">String</span></pre></div></td></tr><tr id="section-8"><td class="docs"><div class="pilwrap"><a href="#section-8" class="pilcrow">&#182;</a></div><h3>telephone</h3>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">telephone: </span><span class="nb">String</span></pre></div></td></tr><tr id="section-9"><td class="docs"><div class="pilwrap"><a href="#section-9" class="pilcrow">&#182;</a></div><h3>mobile</h3>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">mobile: </span><span class="nb">String</span></pre></div></td></tr><tr id="section-10"><td class="docs"><div class="pilwrap"><a href="#section-10" class="pilcrow">&#182;</a></div><h3>isActive</h3>
+
+<p><code>Boolean</code> type, Set to <code>true</code> as default value.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">isActive:</span>
+    <span class="nv">type: </span><span class="nb">Boolean</span>
+    <span class="nv">default: </span><span class="kc">true</span></pre></div></td></tr><tr id="section-11"><td class="docs"><div class="pilwrap"><a href="#section-11" class="pilcrow">&#182;</a></div><h3>isDeleted</h3>
+
+<p><code>Boolean</code> type, Set to <code>false</code> as default value.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">isDeleted:</span>
+    <span class="nv">type: </span><span class="nb">Boolean</span>
+    <span class="nv">default: </span><span class="kc">false</span></pre></div></td></tr><tr id="section-12"><td class="docs"><div class="pilwrap"><a href="#section-12" class="pilcrow">&#182;</a></div><h3>isUserWhitelistedForAllEvents</h3>
+
+<p><code>Boolean</code> type, Set to <code>false</code> as default value.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">isUserWhitelistedForAllEvents:</span>
+    <span class="nv">type: </span><span class="nb">Boolean</span> 
+    <span class="nv">default: </span><span class="kc">false</span></pre></div></td></tr><tr id="section-13"><td class="docs"><div class="pilwrap"><a href="#section-13" class="pilcrow">&#182;</a></div><h3>isUserBlacklistedForAllEvents</h3>
+
+<p><code>Boolean</code> type, Set to <code>false</code> as default value.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">isUserBlacklistedForAllEvents:</span>
+    <span class="nv">type: </span><span class="nb">Boolean</span>
+    <span class="nv">default: </span><span class="kc">false</span></pre></div></td></tr><tr id="section-14"><td class="docs"><div class="pilwrap"><a href="#section-14" class="pilcrow">&#182;</a></div><h3>isWordBlacklistedForAllEvents</h3>
+
+<p><code>Boolean</code> type, Set to <code>false</code> as default value.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">isWordBlacklistedForAllEvents:</span>
+    <span class="nv">type: </span><span class="nb">Boolean</span>
+    <span class="nv">default: </span><span class="kc">false</span>
+<span class="p">)</span></pre></div></td></tr><tr id="section-15"><td class="docs"><div class="pilwrap"><a href="#section-15" class="pilcrow">&#182;</a></div><p>Validates that Client <code>name</code> is of 64 characters.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">Client</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">).</span><span class="nx">validate</span> <span class="nf">(property) -&gt;</span>
+  <span class="nx">property</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">64</span></pre></div></td></tr><tr id="section-16"><td class="docs"><div class="pilwrap"><a href="#section-16" class="pilcrow">&#182;</a></div><p>Validates that Client <code>email</code> is of 128 characters.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">Client</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">).</span><span class="nx">validate</span> <span class="nf">(property) -&gt;</span>
+  <span class="nx">property</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">128</span></pre></div></td></tr><tr id="section-17"><td class="docs"><div class="pilwrap"><a href="#section-17" class="pilcrow">&#182;</a></div><p>Exports <code>Client</code> as module.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">module.exports = </span><span class="nx">Client</span>
+
+</pre></div></td></tr></tbody></table><div id="generated">generated Tue Dec 20 2011 13:41:24 GMT+0100 (CET)  </div><div id="projectname"><a href="../readme.html">Wall Of Tweets</a></div></div></body></html>

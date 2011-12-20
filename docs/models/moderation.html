@@ -1,0 +1,60 @@
+<!DOCTYPE html><html><head><title>moderation.coffee</title><meta http-equiv="Content-Type" content="text/html" charset="UTF-8"><link rel="stylesheet" media="all" href="../docco.css"></head><body><div id="container"><div id="background"></div><div id="jump_to">Jump To &hellip;<div id="jump_wrapper"><div id="jump_page"><a href="../readme.html" class="source"><span class="file_name">README</span></a><a href=".././app.html" class="source "><span class="base_path">. / </span><span class="file_name">app.coffee</span></a><a href="../models/client.html" class="source "><span class="base_path">models / </span><span class="file_name">client.coffee</span></a><a href="../models/event.html" class="source "><span class="base_path">models / </span><span class="file_name">event.coffee</span></a><a href="../models/language.html" class="source "><span class="base_path">models / </span><span class="file_name">language.coffee</span></a><a href="../models/moderation-bucket.html" class="source "><span class="base_path">models / </span><span class="file_name">moderation-bucket.coffee</span></a><a href="../models/moderation.html" class="source selected"><span class="base_path">models / </span><span class="file_name">moderation.coffee</span></a><a href="../models/user.html" class="source "><span class="base_path">models / </span><span class="file_name">user.coffee</span></a><a href=".././mongoose-init.html" class="source "><span class="base_path">. / </span><span class="file_name">mongoose-init.coffee</span></a><a href="../repositories/users.html" class="source "><span class="base_path">repositories / </span><span class="file_name">users.coffee</span></a><a href="../utils/auth.html" class="source "><span class="base_path">utils / </span><span class="file_name">auth.coffee</span></a></div></div></div><table cellpadding="0" cellspacing="0"><thead><tr><th class="docs"><h1>moderation.coffee</h1><div class="filepath">models/</div></th><th class="code"></th></tr></thead><tbody><tr id="section-1"><td class="docs"><div class="pilwrap"><a href="#section-1" class="pilcrow">&#182;</a></div><h3>Requires</h3>
+
+<ul>
+<li>The MongoDB ODM driver <strong>Mongoose</strong>.</li>
+<li><strong>Mongoose</strong> <code>Schema</code>.</li>
+</ul>
+</td><td class="code"><div class="highlight"><pre><span class="nv">mongoose = </span><span class="nx">require</span> <span class="s1">&#39;mongoose&#39;</span>
+<span class="nv">Schema   = </span><span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span></pre></div></td></tr><tr id="section-2"><td class="docs"><div class="pilwrap"><a href="#section-2" class="pilcrow">&#182;</a></div><h3>Moderation</h3>
+
+<p>The new Mongoose <code>Schema</code> of Wall Of Tweets Moderation model.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">Moderation = </span><span class="k">new</span> <span class="nx">Schema</span><span class="p">(</span></pre></div></td></tr><tr id="section-3"><td class="docs"><div class="pilwrap"><a href="#section-3" class="pilcrow">&#182;</a></div><h3>eventId</h3>
+
+<p>Refernce to <code>Event</code> schema model.
+<code>ObjectId</code> type, required, MongoDB index.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">eventId:</span>
+    <span class="nv">type: </span><span class="nx">ObjectId</span>
+    <span class="nv">index: </span><span class="kc">true</span>
+    <span class="nv">required: </span><span class="kc">true</span></pre></div></td></tr><tr id="section-4"><td class="docs"><div class="pilwrap"><a href="#section-4" class="pilcrow">&#182;</a></div><h3>tweetId</h3>
+
+<p>Id givene from Twitter. 
+<code>String</code> type, required.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">tweetId:</span>
+    <span class="nv">type: </span><span class="nb">String</span>
+    <span class="nv">required: </span><span class="kc">true</span></pre></div></td></tr><tr id="section-5"><td class="docs"><div class="pilwrap"><a href="#section-5" class="pilcrow">&#182;</a></div><h3>tweepUsername</h3>
+
+<p>Username of Twitter user (<em>Tweep</em>). 
+<code>String</code> type, required.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">tweepUsername:</span>
+    <span class="nv">type: </span><span class="nb">String</span>
+    <span class="nv">required: </span><span class="kc">true</span></pre></div></td></tr><tr id="section-6"><td class="docs"><div class="pilwrap"><a href="#section-6" class="pilcrow">&#182;</a></div><h3>tweetText</h3>
+
+<p>Actual tweet text going into Moderation (Bucket). 
+<code>String</code> type, required.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">tweetText:</span>
+    <span class="nv">type: </span><span class="nb">String</span>
+    <span class="nv">required: </span><span class="kc">true</span></pre></div></td></tr><tr id="section-7"><td class="docs"><div class="pilwrap"><a href="#section-7" class="pilcrow">&#182;</a></div><h3>tweepAvatarUri</h3>
+
+<p>Twitter user (<em>Tweep</em>) image (avatar) <code>URI</code>. 
+<code>String</code> type, required.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">tweepAvatarUri: </span>
+    <span class="nv">type: </span><span class="nb">String</span>
+    <span class="nv">required: </span><span class="kc">true</span></pre></div></td></tr><tr id="section-8"><td class="docs"><div class="pilwrap"><a href="#section-8" class="pilcrow">&#182;</a></div><h3>date</h3>
+
+<p>Date when tweet entered Moderation or Date of actual tweet. 
+<code>Date</code> type, default value is current actual date.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">date:</span>
+    <span class="nv">type: </span><span class="nb">Date</span>
+    <span class="nv">default: </span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span>
+<span class="p">)</span></pre></div></td></tr><tr id="section-9"><td class="docs"><div class="pilwrap"><a href="#section-9" class="pilcrow">&#182;</a></div><p>Validates that Moderation <code>tweetId</code> is 32 characters long.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">ModertionBucket</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;tweetId&#39;</span><span class="p">).</span><span class="nx">validate</span> <span class="nf">(property) -&gt;</span>
+  <span class="nx">property</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">32</span></pre></div></td></tr><tr id="section-10"><td class="docs"><div class="pilwrap"><a href="#section-10" class="pilcrow">&#182;</a></div><p>Validates that Moderation <code>tweetUsername</code> is 15 characters long.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">ModertionBucket</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;tweetUsername&#39;</span><span class="p">).</span><span class="nx">validate</span> <span class="nf">(property) -&gt;</span>
+  <span class="nx">property</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">15</span></pre></div></td></tr><tr id="section-11"><td class="docs"><div class="pilwrap"><a href="#section-11" class="pilcrow">&#182;</a></div><p>Validates that Moderation <code>tweetText</code> is 140 characters long.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">ModertionBucket</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;tweetText&#39;</span><span class="p">).</span><span class="nx">validate</span> <span class="nf">(property) -&gt;</span>
+  <span class="nx">property</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">140</span></pre></div></td></tr><tr id="section-12"><td class="docs"><div class="pilwrap"><a href="#section-12" class="pilcrow">&#182;</a></div><p>Validates that Moderation <code>tweetAvatarUri</code> is 512 characters long.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">ModertionBucket</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;tweetAvatarUri&#39;</span><span class="p">).</span><span class="nx">validate</span> <span class="nf">(property) -&gt;</span>
+  <span class="nx">property</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">512</span></pre></div></td></tr><tr id="section-13"><td class="docs"><div class="pilwrap"><a href="#section-13" class="pilcrow">&#182;</a></div><p>Exports <code>Moderation</code> as module.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">module.exports = </span><span class="nx">Moderation</span>
+
+</pre></div></td></tr></tbody></table><div id="generated">generated Tue Dec 20 2011 13:41:25 GMT+0100 (CET)  </div><div id="projectname"><a href="../readme.html">Wall Of Tweets</a></div></div></body></html>

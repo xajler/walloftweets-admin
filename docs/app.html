@@ -1,0 +1,75 @@
+<!DOCTYPE html><html><head><title>app.coffee</title><meta http-equiv="Content-Type" content="text/html" charset="UTF-8"><link rel="stylesheet" media="all" href="./docco.css"></head><body><div id="container"><div id="background"></div><div id="jump_to">Jump To &hellip;<div id="jump_wrapper"><div id="jump_page"><a href="./readme.html" class="source"><span class="file_name">README</span></a><a href="././app.html" class="source selected"><span class="base_path">. / </span><span class="file_name">app.coffee</span></a><a href="./models/client.html" class="source "><span class="base_path">models / </span><span class="file_name">client.coffee</span></a><a href="./models/event.html" class="source "><span class="base_path">models / </span><span class="file_name">event.coffee</span></a><a href="./models/language.html" class="source "><span class="base_path">models / </span><span class="file_name">language.coffee</span></a><a href="./models/moderation-bucket.html" class="source "><span class="base_path">models / </span><span class="file_name">moderation-bucket.coffee</span></a><a href="./models/moderation.html" class="source "><span class="base_path">models / </span><span class="file_name">moderation.coffee</span></a><a href="./models/user.html" class="source "><span class="base_path">models / </span><span class="file_name">user.coffee</span></a><a href="././mongoose-init.html" class="source "><span class="base_path">. / </span><span class="file_name">mongoose-init.coffee</span></a><a href="./repositories/users.html" class="source "><span class="base_path">repositories / </span><span class="file_name">users.coffee</span></a><a href="./utils/auth.html" class="source "><span class="base_path">utils / </span><span class="file_name">auth.coffee</span></a></div></div></div><table cellpadding="0" cellspacing="0"><thead><tr><th class="docs"><h1>app.coffee</h1><div class="filepath">./</div></th><th class="code"></th></tr></thead><tbody><tr id="section-1"><td class="docs"><div class="pilwrap"><a href="#section-1" class="pilcrow">&#182;</a></div><h3>Requires</h3>
+
+<ul>
+<li>The <a href="http://expressjs.com">Express.js</a>.</li>
+<li>The <a href="https://github.com/visionmedia/express-resource"><em>express-resource</em></a> - Express.js Resourceful routing.</li>
+<li>Initialization of WallOfTweets MongoDB via Mongoose.</li>
+<li>The users repository for authentication found in <a href="users.html"><code>/repositories/users.coffee</code></a></li>
+</ul>
+</td><td class="code"><div class="highlight"><pre><span class="nv">express = </span><span class="nx">require</span> <span class="s1">&#39;express&#39;</span>
+<span class="nx">require</span> <span class="s1">&#39;express-resource&#39;</span>
+<span class="nv">mongooseInit = </span><span class="nx">require</span> <span class="s1">&#39;./mongoose-init&#39;</span>
+<span class="nv">users = </span><span class="nx">require</span> <span class="s1">&#39;./repositories/users&#39;</span> </pre></div></td></tr><tr id="section-2"><td class="docs"><div class="pilwrap"><a href="#section-2" class="pilcrow">&#182;</a></div><p>Creation of server and <code>app</code> and export.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">app = module.exports = </span><span class="nx">express</span><span class="p">.</span><span class="nx">createServer</span><span class="p">()</span>   </pre></div></td></tr><tr id="section-3"><td class="docs"><div class="pilwrap"><a href="#section-3" class="pilcrow">&#182;</a></div><p>Connecting to the WallOfTweets MongoDB database.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">mongooseInit</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span></pre></div></td></tr><tr id="section-4"><td class="docs"><div class="pilwrap"><a href="#section-4" class="pilcrow">&#182;</a></div><h3>Express Configuration</h3>
+
+<ul>
+<li>Cookie parser.</li>
+<li>Session secret.</li>
+<li>View Engine <a href="https://github.com/visionmedia/jade">Jade</a>.</li>
+<li>Views are se to be in <code>views</code> folder.</li>
+<li>Static files will be served from <code>public</code> folder.</li>
+</ul>
+</td><td class="code"><div class="highlight"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">configure</span> <span class="o">-&gt;</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">use</span> <span class="nx">express</span><span class="p">.</span><span class="nx">logger</span> <span class="s1">&#39;dev&#39;</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">set</span> <span class="s1">&#39;views&#39;</span><span class="p">,</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">&#39;/views&#39;</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">use</span> <span class="nx">express</span><span class="p">.</span><span class="nx">bodyParser</span><span class="p">()</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">use</span> <span class="nx">express</span><span class="p">.</span><span class="nx">cookieParser</span><span class="p">()</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">use</span> <span class="nx">express</span><span class="p">.</span><span class="nx">session</span><span class="p">({</span> <span class="nv">secret: </span><span class="s1">&#39;~oTU2C&quot;!XI=ZS?^}&#39;</span> <span class="p">})</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">use</span> <span class="nx">express</span><span class="p">.</span><span class="nx">methodOverride</span><span class="p">()</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">set</span> <span class="s1">&#39;view engine&#39;</span><span class="p">,</span> <span class="s1">&#39;jade&#39;</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">use</span> <span class="nx">app</span><span class="p">.</span><span class="nx">router</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">use</span> <span class="nx">express</span><span class="p">.</span><span class="nx">static</span><span class="p">(</span><span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">&#39;/public&#39;</span><span class="p">)</span></pre></div></td></tr><tr id="section-5"><td class="docs"><div class="pilwrap"><a href="#section-5" class="pilcrow">&#182;</a></div><h3>Development Configuration</h3>
+
+<ul>
+<li>dumps the exceptions. </li>
+<li>shows stack trace. </li>
+</ul>
+</td><td class="code"><div class="highlight"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">configure</span> <span class="s1">&#39;development&#39;</span><span class="p">,</span> <span class="o">-&gt;</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">use</span> <span class="nx">express</span><span class="p">.</span><span class="nx">errorHandler</span><span class="p">({</span> <span class="nv">dumpExceptions: </span><span class="kc">true</span><span class="p">,</span> <span class="nv">showStack: </span><span class="kc">true</span> <span class="p">})</span></pre></div></td></tr><tr id="section-6"><td class="docs"><div class="pilwrap"><a href="#section-6" class="pilcrow">&#182;</a></div><p>Production Configuration</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">configure</span> <span class="s1">&#39;production&#39;</span><span class="p">,</span> <span class="o">-&gt;</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">use</span> <span class="nx">express</span><span class="p">.</span><span class="nx">errorHandler</span><span class="p">()</span></pre></div></td></tr><tr id="section-7"><td class="docs"><div class="pilwrap"><a href="#section-7" class="pilcrow">&#182;</a></div><h3>Routes</h3>
+
+<p>The UI routes for Wall Of Tweets admin application.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes&#39;</span><span class="p">)(</span><span class="nx">app</span><span class="p">)</span></pre></div></td></tr><tr id="section-8"><td class="docs"><div class="pilwrap"><a href="#section-8" class="pilcrow">&#182;</a></div><p>Index or Home route resource.
+If user is signed in it will redirect to <strong>Events</strong> otherwise
+the user will be redirected to <strong>Login</strong> page.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">get</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="nf">(req, res) -&gt;</span> 
+  <span class="k">if</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span> <span class="k">then</span> <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/events&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/login?redir=&#39;</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="p">)</span> </pre></div></td></tr><tr id="section-9"><td class="docs"><div class="pilwrap"><a href="#section-9" class="pilcrow">&#182;</a></div><p>The <strong>Login</strong> get route resource diplays the login page <code>views/login.jade</code>.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">get</span> <span class="s1">&#39;/login&#39;</span><span class="p">,</span> <span class="nf">(req, res) -&gt;</span> 
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span> <span class="s1">&#39;login&#39;</span>
+    <span class="nv">title: </span><span class="s1">&#39;Login&#39;</span>
+    <span class="nv">layout : </span><span class="s1">&#39;&#39;</span>
+    <span class="nv">locals: </span>
+      <span class="nv">redir: </span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">redir</span>  </pre></div></td></tr><tr id="section-10"><td class="docs"><div class="pilwrap"><a href="#section-10" class="pilcrow">&#182;</a></div><p>The <strong>Login</strong> post route resource authenticates the validity of user input 
+and if it is correct redirects him to <strong>Events*</strong> page or redirects the user again 
+to login page <code>views/login.jade</code>.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">post</span> <span class="s1">&#39;/login&#39;</span><span class="p">,</span> <span class="nf">(req, res) -&gt;</span>
+  <span class="nx">users</span><span class="p">.</span><span class="nx">authenticate</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">email</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">password</span><span class="p">,</span> <span class="nf">(user) -&gt;</span>
+    <span class="k">if</span> <span class="nx">user</span>
+      <span class="nv">req.session.user = </span><span class="nx">user</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">redir</span> <span class="o">||</span> <span class="s1">&#39;/events&#39;</span><span class="p">)</span>
+    <span class="k">else</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">render</span> <span class="s1">&#39;login&#39;</span>
+        <span class="nv">title: </span><span class="s1">&#39;Login&#39;</span>
+        <span class="nv">layout : </span><span class="s1">&#39;&#39;</span>
+        <span class="nv">locals:</span>
+          <span class="nv">redir: </span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">redir</span></pre></div></td></tr><tr id="section-11"><td class="docs"><div class="pilwrap"><a href="#section-11" class="pilcrow">&#182;</a></div><p>The <strong>Logout*</strong> resource route destroys the user session and log out the user from application.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">get</span> <span class="s1">&#39;/logout&#39;</span><span class="p">,</span> <span class="nf">(req, res) -&gt;</span>
+  <span class="k">delete</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span> <span class="s1">&#39;/login&#39;</span> 
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span> <span class="mi">3000</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s1">&#39;Express server listening on port %d in %s mode&#39;</span><span class="p">,</span> <span class="nx">app</span><span class="p">.</span><span class="nx">address</span><span class="p">().</span><span class="nx">port</span><span class="p">,</span> <span class="nx">app</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">env</span><span class="p">;</span>
+
+</pre></div></td></tr></tbody></table><div id="generated">generated Tue Dec 20 2011 13:41:24 GMT+0100 (CET)  </div><div id="projectname"><a href="./readme.html">Wall Of Tweets</a></div></div></body></html>

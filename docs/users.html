@@ -1,0 +1,49 @@
+<!DOCTYPE html>  <html> <head>   <title>users.coffee</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               users.coffee             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <h3>Users Repository Requirements</h3>
+
+<p><code>auth</code> utility for salting and hashing password.
+The Mongoose model of <code>user</code>.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nv">Auth = </span><span class="nx">require</span> <span class="s1">&#39;../utils/auth&#39;</span>
+<span class="nv">User = </span><span class="nx">require</span> <span class="s1">&#39;../models/user&#39;</span>
+<span class="nv">mongoose = </span><span class="nx">require</span> <span class="s1">&#39;mongoose&#39;</span>
+
+<span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s1">&#39;mongodb://localhost/walloftweets&#39;</span><span class="p">)</span>
+
+<span class="nv">User = </span><span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="nx">User</span><span class="p">)</span> </pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>Authenticate 
+for given email and password authenticates user aginst MongoDB user.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nv">authenticate = </span><span class="nf">(email, password, callback) -&gt;</span>
+  <span class="nx">User</span><span class="p">.</span><span class="nx">findOne</span> 
+    <span class="s1">&#39;email&#39;</span><span class="o">:</span> <span class="nx">email</span>
+  <span class="p">,</span> <span class="nf">(err, user) -&gt;</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="k">then</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">err</span> <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">user</span>
+    <span class="nx">unless</span> <span class="nx">user</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">email</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nx">password</span>
+      <span class="nx">callback</span> <span class="kc">null</span>
+
+    <span class="nv">auth = </span><span class="k">new</span> <span class="nx">Auth</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="nx">auth</span><span class="p">.</span><span class="nx">validate</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">salt</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">password</span><span class="p">)</span>
+      <span class="nx">callback</span> <span class="nx">user</span>
+      <span class="k">return</span>
+    <span class="nx">callback</span> <span class="kc">null</span>
+
+<span class="nv">save = </span><span class="nf">(user) -&gt;</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>console.log user</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nx">user</span><span class="p">.</span><span class="nx">save</span> <span class="nf">(err) -&gt;</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="k">then</span> <span class="k">throw</span> <span class="nx">err</span> <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s1">&#39;User saved!&#39;</span>
+
+<span class="nv">createDefaultUser = </span><span class="o">-&gt;</span>
+  <span class="nv">user = </span><span class="k">new</span> <span class="nx">User</span>
+  <span class="nv">user.email = </span><span class="s1">&#39;xajler@gmail.com&#39;</span>
+  <span class="nv">user.salt = </span><span class="s1">&#39;T%6ScZmQ&#39;</span>
+  <span class="nv">user.password = </span><span class="s1">&#39;a7caacc44236c74f54571498c33977d3b5f63dec54ae1c095818308607c8302c&#39;</span>
+  <span class="nv">user.firstName = </span><span class="s1">&#39;Kornelije&#39;</span>
+  <span class="nv">user.lastName = </span><span class="s1">&#39;Sajler&#39;</span>
+  <span class="nx">save</span> <span class="nx">user</span>
+
+<span class="nv">users =</span>
+  <span class="s1">&#39;xajler@gmail.com&#39;</span><span class="o">:</span>
+    <span class="nv">email: </span><span class="s1">&#39;xajler@gmail.com&#39;</span>
+    <span class="nv">salt: </span><span class="s1">&#39;T%6ScZmQ&#39;</span>
+    <span class="nv">password: </span><span class="s1">&#39;a7caacc44236c74f54571498c33977d3b5f63dec54ae1c095818308607c8302c&#39;</span>
+
+<span class="nv">module.exports.authenticate = </span><span class="nx">authenticate</span>
+<span class="nv">module.exports.save = </span><span class="nx">save</span>
+<span class="nv">module.exports.createDefaultUser = </span><span class="nx">createDefaultUser</span>  
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

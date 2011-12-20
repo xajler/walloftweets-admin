@@ -1,11 +1,19 @@
+#### Requires
+#
+# * `auth` helper utility for salting and hashing password.
+# * The Mongoose model of `user`.
+# * The MongoDB ODM driver **Mongoose**.
 Auth = require '../utils/auth'
 User = require '../models/user'
 mongoose = require 'mongoose'
 
-mongoose.connect('mongodb://localhost/walloftweets')
-
+# Gets the Mongoose **User** model representation.
 User = mongoose.model('User', User) 
 
+#### Authenticate
+# For given email and password authenticates user aginst MongoDB user collection.
+# Uses `auth` helper utility to hash the password and salt to validate user.  
+# Returns a user as a callback.
 authenticate = (email, password, callback) ->
   User.findOne 
     'email': email
@@ -22,8 +30,9 @@ authenticate = (email, password, callback) ->
       return
     callback null
 
+#### Save
+# Saves the given user to the MongoDB user collection.
 save = (user) ->
-  # console.log user
   user.save (err) ->
     if err then throw err else console.log 'User saved!'
 
@@ -42,6 +51,8 @@ users =
     salt: 'T%6ScZmQ'
     password: 'a7caacc44236c74f54571498c33977d3b5f63dec54ae1c095818308607c8302c'
 
-module.exports.authenticate = authenticate
+# Exports the `authenticate` function.
+module.exports.authenticate = authenticate 
+# Exports the `save` method.
 module.exports.save = save
 module.exports.createDefaultUser = createDefaultUser  

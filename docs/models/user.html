@@ -1,0 +1,76 @@
+<!DOCTYPE html><html><head><title>user.coffee</title><meta http-equiv="Content-Type" content="text/html" charset="UTF-8"><link rel="stylesheet" media="all" href="../docco.css"></head><body><div id="container"><div id="background"></div><div id="jump_to">Jump To &hellip;<div id="jump_wrapper"><div id="jump_page"><a href="../readme.html" class="source"><span class="file_name">README</span></a><a href=".././app.html" class="source "><span class="base_path">. / </span><span class="file_name">app.coffee</span></a><a href="../models/client.html" class="source "><span class="base_path">models / </span><span class="file_name">client.coffee</span></a><a href="../models/event.html" class="source "><span class="base_path">models / </span><span class="file_name">event.coffee</span></a><a href="../models/language.html" class="source "><span class="base_path">models / </span><span class="file_name">language.coffee</span></a><a href="../models/moderation-bucket.html" class="source "><span class="base_path">models / </span><span class="file_name">moderation-bucket.coffee</span></a><a href="../models/moderation.html" class="source "><span class="base_path">models / </span><span class="file_name">moderation.coffee</span></a><a href="../models/user.html" class="source selected"><span class="base_path">models / </span><span class="file_name">user.coffee</span></a><a href=".././mongoose-init.html" class="source "><span class="base_path">. / </span><span class="file_name">mongoose-init.coffee</span></a><a href="../repositories/users.html" class="source "><span class="base_path">repositories / </span><span class="file_name">users.coffee</span></a><a href="../utils/auth.html" class="source "><span class="base_path">utils / </span><span class="file_name">auth.coffee</span></a></div></div></div><table cellpadding="0" cellspacing="0"><thead><tr><th class="docs"><h1>user.coffee</h1><div class="filepath">models/</div></th><th class="code"></th></tr></thead><tbody><tr id="section-1"><td class="docs"><div class="pilwrap"><a href="#section-1" class="pilcrow">&#182;</a></div><h3>Requires</h3>
+
+<ul>
+<li>The MongoDB ODM driver <strong>Mongoose</strong>.</li>
+<li><strong>Mongoose</strong> <code>Schema</code>.</li>
+</ul>
+</td><td class="code"><div class="highlight"><pre><span class="nv">mongoose = </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;mongoose&#39;</span><span class="p">)</span>
+<span class="nv">Schema = </span><span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span></pre></div></td></tr><tr id="section-2"><td class="docs"><div class="pilwrap"><a href="#section-2" class="pilcrow">&#182;</a></div><h3>User</h3>
+
+<p>The new Mongoose <code>Schema</code> of Wall Of Tweets User model.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">User = </span><span class="k">new</span> <span class="nx">Schema</span><span class="p">(</span></pre></div></td></tr><tr id="section-3"><td class="docs"><div class="pilwrap"><a href="#section-3" class="pilcrow">&#182;</a></div><h3>email</h3>
+
+<p><code>String</code> type, required, Unique MongoDB index.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">email:</span>
+    <span class="nv">type: </span><span class="nb">String</span>
+    <span class="nv">required: </span><span class="kc">true</span>
+    <span class="nv">index: </span>
+      <span class="nv">unique: </span><span class="kc">true</span>
+    <span class="nv">validate: </span><span class="sr">/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/</span></pre></div></td></tr><tr id="section-4"><td class="docs"><div class="pilwrap"><a href="#section-4" class="pilcrow">&#182;</a></div><h3>password</h3>
+
+<p>Hashed password of salt and password hashed.
+<code>String</code> type, required, MongoDB index.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">password:</span>
+    <span class="nv">type: </span><span class="nb">String</span>
+    <span class="nv">index: </span><span class="kc">true</span>
+    <span class="nv">required: </span><span class="kc">true</span></pre></div></td></tr><tr id="section-5"><td class="docs"><div class="pilwrap"><a href="#section-5" class="pilcrow">&#182;</a></div><h3>salt</h3>
+
+<p>The salt for (un)hashing the password.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">salt: </span><span class="nb">String</span></pre></div></td></tr><tr id="section-6"><td class="docs"><div class="pilwrap"><a href="#section-6" class="pilcrow">&#182;</a></div><h3>firstName</h3>
+
+<p><code>String</code> type, required, MongoDB index.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">firstName:</span>
+    <span class="nv">type: </span><span class="nb">String</span>
+    <span class="nv">index: </span><span class="kc">true</span>
+    <span class="nv">required: </span><span class="kc">true</span></pre></div></td></tr><tr id="section-7"><td class="docs"><div class="pilwrap"><a href="#section-7" class="pilcrow">&#182;</a></div><h3>lastName</h3>
+
+<p><code>String</code> type, required, MongoDB index.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">lastName:</span>
+    <span class="nv">type: </span><span class="nb">String</span>
+    <span class="nv">index: </span><span class="kc">true</span>
+    <span class="nv">required: </span><span class="kc">true</span></pre></div></td></tr><tr id="section-8"><td class="docs"><div class="pilwrap"><a href="#section-8" class="pilcrow">&#182;</a></div><h3>role</h3>
+
+<p>The User role in application, available roles:</p>
+
+<ul>
+<li><em>Administrator</em> - UXPassion personnel only!</li>
+<li><em>Event Administrator</em> - The admin of the event.</li>
+</ul>
+
+<p>The default role for user is <em>Event Administrator</em>.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">role:</span>
+    <span class="nv">type: </span><span class="nb">String</span>
+    <span class="nv">enum: </span><span class="p">[</span><span class="s1">&#39;Administrator&#39;</span><span class="p">,</span> <span class="s1">&#39;Event Administrator&#39;</span><span class="p">]</span>
+    <span class="nv">default: </span><span class="s1">&#39;Event Administrator&#39;</span></pre></div></td></tr><tr id="section-9"><td class="docs"><div class="pilwrap"><a href="#section-9" class="pilcrow">&#182;</a></div><h3>isActive</h3>
+
+<p><code>Boolean</code> type, Set to <code>true</code> as default value.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">isActive:</span>
+    <span class="nv">type: </span><span class="nb">Boolean</span>
+    <span class="nv">default: </span><span class="kc">true</span></pre></div></td></tr><tr id="section-10"><td class="docs"><div class="pilwrap"><a href="#section-10" class="pilcrow">&#182;</a></div><h3>isDeleted</h3>
+
+<p><code>Boolean</code> type, Set to <code>false</code> as default value.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">isDeleted:</span>
+    <span class="nv">type: </span><span class="nb">Boolean</span>
+    <span class="nv">default: </span><span class="kc">false</span>
+<span class="p">)</span></pre></div></td></tr><tr id="section-11"><td class="docs"><div class="pilwrap"><a href="#section-11" class="pilcrow">&#182;</a></div><p>Validates that User <code>fullName</code> is 32 characters long.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">User</span><span class="p">.</span><span class="nx">virtual</span><span class="p">(</span><span class="s1">&#39;fullName&#39;</span><span class="p">).</span><span class="nx">get</span> <span class="o">-&gt;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span></pre></div></td></tr><tr id="section-12"><td class="docs"><div class="pilwrap"><a href="#section-12" class="pilcrow">&#182;</a></div><p>Validates that User <code>email</code> is 32 characters long.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">User</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">).</span><span class="nx">validate</span> <span class="nf">(property) -&gt;</span>
+  <span class="nx">property</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">128</span></pre></div></td></tr><tr id="section-13"><td class="docs"><div class="pilwrap"><a href="#section-13" class="pilcrow">&#182;</a></div><p>Validates that User <code>firstName</code> is 32 characters long.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">User</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;firstName&#39;</span><span class="p">).</span><span class="nx">validate</span> <span class="nf">(property) -&gt;</span>
+  <span class="nx">property</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">32</span></pre></div></td></tr><tr id="section-14"><td class="docs"><div class="pilwrap"><a href="#section-14" class="pilcrow">&#182;</a></div><p>Validates that User <code>lastName</code> is 32 characters long.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">User</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;lastName&#39;</span><span class="p">).</span><span class="nx">validate</span> <span class="nf">(property) -&gt;</span>
+  <span class="nx">property</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">64</span></pre></div></td></tr><tr id="section-15"><td class="docs"><div class="pilwrap"><a href="#section-15" class="pilcrow">&#182;</a></div><p>Exports <code>User</code> as module.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">module.exports = </span><span class="nx">User</span>
+
+</pre></div></td></tr></tbody></table><div id="generated">generated Tue Dec 20 2011 13:41:25 GMT+0100 (CET)  </div><div id="projectname"><a href="../readme.html">Wall Of Tweets</a></div></div></body></html>
