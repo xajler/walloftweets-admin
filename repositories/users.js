@@ -1,15 +1,11 @@
 (function() {
-  var Auth, User, authenticate, createDefaultUser, mongoose, save, users;
+  var Auth, User, authenticate, mongoose, save;
 
   Auth = require('../utils/auth');
 
   User = require('../models/user');
 
   mongoose = require('mongoose');
-
-  mongoose.connect('mongodb://localhost/walloftweets');
-
-  User = mongoose.model('User', User);
 
   authenticate = function(email, password, callback) {
     return User.findOne({
@@ -44,29 +40,8 @@
     });
   };
 
-  createDefaultUser = function() {
-    var user;
-    user = new User;
-    user.email = 'xajler@gmail.com';
-    user.salt = 'T%6ScZmQ';
-    user.password = 'a7caacc44236c74f54571498c33977d3b5f63dec54ae1c095818308607c8302c';
-    user.firstName = 'Kornelije';
-    user.lastName = 'Sajler';
-    return save(user);
-  };
-
-  users = {
-    'xajler@gmail.com': {
-      email: 'xajler@gmail.com',
-      salt: 'T%6ScZmQ',
-      password: 'a7caacc44236c74f54571498c33977d3b5f63dec54ae1c095818308607c8302c'
-    }
-  };
-
   module.exports.authenticate = authenticate;
 
   module.exports.save = save;
-
-  module.exports.createDefaultUser = createDefaultUser;
 
 }).call(this);

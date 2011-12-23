@@ -1,5 +1,5 @@
 (function() {
-  var getCurrentUserFullName, requiresLogin;
+  var eventRoute, getCurrentUserFullName, requiresLogin;
 
   requiresLogin = function(req, res, next) {
     if (req.session.user) {
@@ -17,7 +17,7 @@
     }
   };
 
-  module.exports = function(app) {
+  eventRoute = function(app) {
     return app.get('/events', requiresLogin, function(req, res) {
       return res.render('index', {
         title: 'Events',
@@ -25,5 +25,7 @@
       });
     });
   };
+
+  module.exports = eventRoute;
 
 }).call(this);

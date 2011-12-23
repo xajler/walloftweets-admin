@@ -1,7 +1,10 @@
-*.coffee 
+# *.coffee 
 ./public/*
 ./node_modules/*
 ./test/*
 ./views/*
 ./.git/*
+./msg.md
+./README.md
+./start.sh
 

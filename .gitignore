@@ -13,3 +13,4 @@ testing
 node_modules/
 testing
 msg.md
+.monitor

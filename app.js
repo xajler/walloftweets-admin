@@ -1,13 +1,17 @@
 (function() {
-  var app, express, users;
+  var app, express, mongooseInit, users;
 
   express = require('express');
 
   require('express-resource');
 
-  app = module.exports = express.createServer();
+  mongooseInit = require('./mongoose-init');
 
   users = require('./repositories/users');
+
+  app = module.exports = express.createServer();
+
+  mongooseInit.connect();
 
   app.configure(function() {
     app.use(express.logger('dev'));
@@ -45,7 +49,6 @@
   });
 
   app.get('/login', function(req, res) {
-    console.log('going to events');
     return res.render('login', {
       title: 'Login',
       layout: '',

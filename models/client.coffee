@@ -19,8 +19,7 @@ Client = new Schema(
   email:
     type: String
     required: true
-    index: 
-      unique: true
+    unique: true
     validate: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
 
   #### contactPersonName
@@ -68,5 +67,5 @@ Client.path('name').validate (property) ->
 Client.path('email').validate (property) ->
   property.length <= 128
 
-# Exports `Client` as module.
-module.exports = Client
+# Exports `Client` Mongoose module as module.
+module.exports = mongoose.model('Client', Client)

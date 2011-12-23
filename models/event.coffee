@@ -20,7 +20,7 @@ Words = new Schema(
   #### name
   # `String` type, required.
   name:
-    type: String, 
+    type: String,
     required: true
 )
 
@@ -46,15 +46,17 @@ Event = new Schema(
   #### clientId
   # Refernce to `Client` schema model. 
   # `ObjectId` type, required, MongoDB index.
-  clientId:
-    type: ObjectId
+  clientId: 
+    type: Schema.ObjectId
+    ref: 'Client'
     index: true
     required: true
   #### userId
   # Refernce to `User` schema model. 
   # `ObjectId` type, required, MongoDB index.
   userId:
-    type: ObjectId
+    type: Schema.ObjectId
+    ref: 'User'
     index: true
     required: true
   #### hasTag
@@ -71,7 +73,7 @@ Event = new Schema(
   # The number of tweets shown on the wall.
   tweetsToShow: Number
   #### screenRefreshInterval
-  # ??????????
+  # ??????!!!!!
   screenRefreshInterval: Number
   ##### isEnabledForModeration
   # Does Event need Moderation?
@@ -149,14 +151,5 @@ Words.path('name').validate (property) ->
 Phrases.path('name').validate (property) ->
   property.length <= 128;
 
-# Exports `Tweeple` as module.
-module.exports = Tweeple
-
-# Exports `Words` as module.
-module.exports = Words
-
-# Exports `Phrases` as module.
-module.exports = Phrases
-
-# Exports `Event` as module.
-module.exports = Event
+# Exports `Event` Mongoose module as module.
+module.exports = mongoose.model('Event', Event)

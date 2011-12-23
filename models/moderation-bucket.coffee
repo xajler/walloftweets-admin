@@ -68,5 +68,5 @@ ModertionBucket.path('tweetText').validate (property) ->
 ModertionBucket.path('tweetAvatarUri').validate (property) ->
   property.length <= 512
 
-# Exports `ModerationBucket` as module.
-module.exports = ModerationBucket
+# Exports `ModerationBucket` Mongoose module as module.
+module.exports = mongoose.model('ModerationBucket', ModerationBucket)

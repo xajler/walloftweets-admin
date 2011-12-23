@@ -2,10 +2,10 @@
 # * The MongoDB ODM driver **Mongoose**.
 mongoose = require 'mongoose'
 
-#### init
+#### Exports Monngoose init as module
 # MongoDb database connection provider. 
 # If application is not connected to  it creates new
-init = do ->
+module.exports = do ->
   connected = false                    
   
   #### connect
@@ -16,6 +16,3 @@ init = do ->
       connectionString = connectionString || 'mongodb://localhost/walloftweets'
       mongoose.connect(connectionString)
       connected = true;
-
-# Exports `init` as module.
-module.exports = init

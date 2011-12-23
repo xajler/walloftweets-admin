@@ -9,9 +9,7 @@
     email: {
       type: String,
       required: true,
-      index: {
-        unique: true
-      },
+      unique: true,
       validate: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
     },
     password: {
@@ -61,6 +59,6 @@
     return property.length <= 64;
   });
 
-  module.exports = User;
+  module.exports = mongoose.model('User', User);
 
 }).call(this);

@@ -29,5 +29,5 @@ Language.path('nativeName').validate (property) ->
 Language.path('cultureCode').validate (property) ->
   property.length <= 7
 
-# Exports `Language` as module.
-module.exports = Language
+# Exports `Language` Mongoose module as module.
+module.exports = mongoose.model('Language', Language)

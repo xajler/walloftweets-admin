@@ -14,9 +14,7 @@
     email: {
       type: String,
       required: true,
-      index: {
-        unique: true
-      },
+      unique: true,
       validate: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
     },
     contactPersonName: String,
@@ -53,5 +51,7 @@
   Client.path('email').validate(function(property) {
     return property.length <= 128;
   });
+
+  module.exports = mongoose.model('Client', Client);
 
 }).call(this);

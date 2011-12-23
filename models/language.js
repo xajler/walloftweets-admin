@@ -9,7 +9,7 @@
     name: String,
     nativeName: String,
     cultureCode: String,
-    Position: Number
+    position: Number
   });
 
   Language.path('name').validate(function(property) {
@@ -23,5 +23,7 @@
   Language.path('cultureCode').validate(function(property) {
     return property.length <= 7;
   });
+
+  module.exports = mongoose.model('Language', Language);
 
 }).call(this);

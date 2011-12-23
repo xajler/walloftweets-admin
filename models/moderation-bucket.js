@@ -51,4 +51,6 @@
     return property.length <= 512;
   });
 
+  module.exports = mongoose.model('ModerationBucket', ModerationBucket);
+
 }).call(this);

@@ -33,20 +33,22 @@
     }
   });
 
-  Modertion.path('tweetId').validate(function(property) {
+  ModertionBucket.path('tweetId').validate(function(property) {
     return property.length <= 32;
   });
 
-  Modertion.path('tweetUsername').validate(function(property) {
+  ModertionBucket.path('tweetUsername').validate(function(property) {
     return property.length <= 15;
   });
 
-  Modertion.path('tweetText').validate(function(property) {
+  ModertionBucket.path('tweetText').validate(function(property) {
     return property.length <= 140;
   });
 
-  Modertion.path('tweetAvatarUri').validate(function(property) {
+  ModertionBucket.path('tweetAvatarUri').validate(function(property) {
     return property.length <= 512;
   });
+
+  module.exports = mongoose.model('Moderation', Moderation);
 
 }).call(this);

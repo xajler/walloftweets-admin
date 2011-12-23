@@ -33,16 +33,18 @@
       required: true
     },
     clientId: {
-      type: ObjectId,
+      type: Schema.ObjectId,
+      ref: 'Client',
       index: true,
       required: true
     },
     userId: {
-      type: ObjectId,
+      type: Schema.ObjectId,
+      ref: 'User',
       index: true,
       required: true
     },
-    hasTag: {
+    hashTag: {
       type: String,
       index: true,
       required: true
@@ -98,5 +100,7 @@
   Phrases.path('name').validate(function(property) {
     return property.length <= 128;
   });
+
+  module.exports = mongoose.model('Event', Event);
 
 }).call(this);

@@ -12,8 +12,7 @@ User = new Schema(
   email:
     type: String
     required: true
-    index: 
-      unique: true
+    unique: true
     validate: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
   #### password
   # Hashed password of salt and password hashed.
@@ -76,5 +75,5 @@ User.path('firstName').validate (property) ->
 User.path('lastName').validate (property) ->
   property.length <= 64
 
-# Exports `User` as module.
-module.exports = User
+# Exports `User` Mongoose model as module.
+module.exports = mongoose.model('User', User)
