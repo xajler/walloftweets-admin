@@ -14,19 +14,20 @@
 </td><td class="code"><div class="highlight"><pre>  <span class="nv">email:</span>
     <span class="nv">type: </span><span class="nb">String</span>
     <span class="nv">required: </span><span class="kc">true</span>
-    <span class="nv">index: </span>
-      <span class="nv">unique: </span><span class="kc">true</span>
+    <span class="nv">unique: </span><span class="kc">true</span>
     <span class="nv">validate: </span><span class="sr">/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/</span></pre></div></td></tr><tr id="section-4"><td class="docs"><div class="pilwrap"><a href="#section-4" class="pilcrow">&#182;</a></div><h3>password</h3>
 
 <p>Hashed password of salt and password hashed.
-<code>String</code> type, required, MongoDB index.</p>
+<code>String</code> type, required.</p>
 </td><td class="code"><div class="highlight"><pre>  <span class="nv">password:</span>
     <span class="nv">type: </span><span class="nb">String</span>
-    <span class="nv">index: </span><span class="kc">true</span>
     <span class="nv">required: </span><span class="kc">true</span></pre></div></td></tr><tr id="section-5"><td class="docs"><div class="pilwrap"><a href="#section-5" class="pilcrow">&#182;</a></div><h3>salt</h3>
 
-<p>The salt for (un)hashing the password.</p>
-</td><td class="code"><div class="highlight"><pre>  <span class="nv">salt: </span><span class="nb">String</span></pre></div></td></tr><tr id="section-6"><td class="docs"><div class="pilwrap"><a href="#section-6" class="pilcrow">&#182;</a></div><h3>firstName</h3>
+<p>The salt for (un)hashing the password.
+<code>String</code> type, required.</p>
+</td><td class="code"><div class="highlight"><pre>  <span class="nv">salt: </span>
+    <span class="nv">type: </span><span class="nb">String</span>
+    <span class="nv">required: </span><span class="kc">true</span></pre></div></td></tr><tr id="section-6"><td class="docs"><div class="pilwrap"><a href="#section-6" class="pilcrow">&#182;</a></div><h3>firstName</h3>
 
 <p><code>String</code> type, required, MongoDB index.</p>
 </td><td class="code"><div class="highlight"><pre>  <span class="nv">firstName:</span>
@@ -62,15 +63,15 @@
 </td><td class="code"><div class="highlight"><pre>  <span class="nv">isDeleted:</span>
     <span class="nv">type: </span><span class="nb">Boolean</span>
     <span class="nv">default: </span><span class="kc">false</span>
-<span class="p">)</span></pre></div></td></tr><tr id="section-11"><td class="docs"><div class="pilwrap"><a href="#section-11" class="pilcrow">&#182;</a></div><p>Validates that User <code>fullName</code> is 32 characters long.</p>
+<span class="p">)</span></pre></div></td></tr><tr id="section-11"><td class="docs"><div class="pilwrap"><a href="#section-11" class="pilcrow">&#182;</a></div><p>Sets the virtual <code>fullName</code> to be concationation of <code>firstName</code> and <code>lastName</code>.</p>
 </td><td class="code"><div class="highlight"><pre><span class="nx">User</span><span class="p">.</span><span class="nx">virtual</span><span class="p">(</span><span class="s1">&#39;fullName&#39;</span><span class="p">).</span><span class="nx">get</span> <span class="o">-&gt;</span>
-  <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span></pre></div></td></tr><tr id="section-12"><td class="docs"><div class="pilwrap"><a href="#section-12" class="pilcrow">&#182;</a></div><p>Validates that User <code>email</code> is 32 characters long.</p>
+  <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span></pre></div></td></tr><tr id="section-12"><td class="docs"><div class="pilwrap"><a href="#section-12" class="pilcrow">&#182;</a></div><p>Validates that User <code>email</code> is 64 characters long.</p>
 </td><td class="code"><div class="highlight"><pre><span class="nx">User</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">).</span><span class="nx">validate</span> <span class="nf">(property) -&gt;</span>
-  <span class="nx">property</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">128</span></pre></div></td></tr><tr id="section-13"><td class="docs"><div class="pilwrap"><a href="#section-13" class="pilcrow">&#182;</a></div><p>Validates that User <code>firstName</code> is 32 characters long.</p>
+  <span class="nx">property</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">64</span></pre></div></td></tr><tr id="section-13"><td class="docs"><div class="pilwrap"><a href="#section-13" class="pilcrow">&#182;</a></div><p>Validates that User <code>firstName</code> is 32 characters long.</p>
 </td><td class="code"><div class="highlight"><pre><span class="nx">User</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;firstName&#39;</span><span class="p">).</span><span class="nx">validate</span> <span class="nf">(property) -&gt;</span>
-  <span class="nx">property</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">32</span></pre></div></td></tr><tr id="section-14"><td class="docs"><div class="pilwrap"><a href="#section-14" class="pilcrow">&#182;</a></div><p>Validates that User <code>lastName</code> is 32 characters long.</p>
+  <span class="nx">property</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">32</span></pre></div></td></tr><tr id="section-14"><td class="docs"><div class="pilwrap"><a href="#section-14" class="pilcrow">&#182;</a></div><p>Validates that User <code>lastName</code> is 64 characters long.</p>
 </td><td class="code"><div class="highlight"><pre><span class="nx">User</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;lastName&#39;</span><span class="p">).</span><span class="nx">validate</span> <span class="nf">(property) -&gt;</span>
-  <span class="nx">property</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">64</span></pre></div></td></tr><tr id="section-15"><td class="docs"><div class="pilwrap"><a href="#section-15" class="pilcrow">&#182;</a></div><p>Exports <code>User</code> as module.</p>
-</td><td class="code"><div class="highlight"><pre><span class="nv">module.exports = </span><span class="nx">User</span>
+  <span class="nx">property</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">64</span></pre></div></td></tr><tr id="section-15"><td class="docs"><div class="pilwrap"><a href="#section-15" class="pilcrow">&#182;</a></div><p>Exports <code>User</code> Mongoose model as module.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">module.exports = </span><span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="nx">User</span><span class="p">)</span>
 
-</pre></div></td></tr></tbody></table><div id="generated">generated Tue Dec 20 2011 13:41:25 GMT+0100 (CET)  </div><div id="projectname"><a href="../readme.html">Wall Of Tweets</a></div></div></body></html>
+</pre></div></td></tr></tbody></table><div id="generated">generated Thu Jan 12 2012 23:46:53 GMT+0100 (CET)  </div><div id="projectname"><a href="../readme.html">Wall Of Tweets</a></div></div></body></html>

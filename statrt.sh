@@ -1,6 +1,6 @@
 #!/bin/bash
 
-(coffee -cw models/ repositories/ app.coffee routes.coffee mongoose-init.coffee fake-data.coffee &)
+(coffee -cw models/ repositories/ app.coffee routes.coffee mongoose-init.coffee &)
 nodemon app.coffee
 
 # mongod --dbpath /usr/local/var/mongodb

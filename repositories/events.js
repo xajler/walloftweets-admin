@@ -5,12 +5,12 @@
 
   mongoose = require('mongoose');
 
-  save = function(event) {
+  save = function(event, next) {
     return event.save(function(err) {
       if (err) {
-        throw err;
+        return next(false);
       } else {
-        return console.log('Event saved!');
+        return next(true);
       }
     });
   };

@@ -7,49 +7,35 @@
 </ul>
 </td><td class="code"><div class="highlight"><pre><span class="nv">Auth = </span><span class="nx">require</span> <span class="s1">&#39;../utils/auth&#39;</span>
 <span class="nv">User = </span><span class="nx">require</span> <span class="s1">&#39;../models/user&#39;</span>
-<span class="nv">mongoose = </span><span class="nx">require</span> <span class="s1">&#39;mongoose&#39;</span></pre></div></td></tr><tr id="section-2"><td class="docs"><div class="pilwrap"><a href="#section-2" class="pilcrow">&#182;</a></div><p>Gets the Mongoose <strong>User</strong> model representation.</p>
-</td><td class="code"><div class="highlight"><pre><span class="nv">User = </span><span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="nx">User</span><span class="p">)</span> </pre></div></td></tr><tr id="section-3"><td class="docs"><div class="pilwrap"><a href="#section-3" class="pilcrow">&#182;</a></div><h3>Authenticate</h3>
+<span class="nv">mongoose = </span><span class="nx">require</span> <span class="s1">&#39;mongoose&#39;</span></pre></div></td></tr><tr id="section-2"><td class="docs"><div class="pilwrap"><a href="#section-2" class="pilcrow">&#182;</a></div><h3>FindByEmail</h3>
+
+<p>Finds the <code>User</code> by given email.
+Returns a <code>User</code> as a next callback.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">findByEmail = </span><span class="nf">(email, next) -&gt;</span>
+  <span class="nx">User</span><span class="p">.</span><span class="nx">where</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="nx">email</span><span class="p">).</span><span class="nx">findOne</span><span class="p">(</span><span class="nf">(err, user) -&gt;</span>
+    <span class="k">if</span> <span class="nx">user</span> <span class="k">then</span> <span class="nx">next</span> <span class="nx">user</span> <span class="k">else</span> <span class="nx">next</span> <span class="kc">null</span>
+  <span class="p">)</span></pre></div></td></tr><tr id="section-3"><td class="docs"><div class="pilwrap"><a href="#section-3" class="pilcrow">&#182;</a></div><h3>Authenticate</h3>
 
 <p>For given email and password authenticates user aginst MongoDB user collection.
 Uses <code>auth</code> helper utility to hash the password and salt to validate user. <br />
-Returns a user as a callback.</p>
-</td><td class="code"><div class="highlight"><pre><span class="nv">authenticate = </span><span class="nf">(email, password, callback) -&gt;</span>
-  <span class="nx">User</span><span class="p">.</span><span class="nx">findOne</span> 
-    <span class="s1">&#39;email&#39;</span><span class="o">:</span> <span class="nx">email</span>
-  <span class="p">,</span> <span class="nf">(err, user) -&gt;</span>
-    <span class="k">if</span> <span class="nx">err</span> <span class="k">then</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">err</span> <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">user</span>
-    <span class="nx">unless</span> <span class="nx">user</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">email</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nx">password</span>
-      <span class="nx">callback</span> <span class="kc">null</span>
+Returns a <code>User</code> as a next callback.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">authenticate = </span><span class="nf">(email, password, next) -&gt;</span>
+  <span class="nx">@findByEmail</span> <span class="nx">email</span><span class="p">,</span> <span class="nf">(user) -&gt;</span>
+    <span class="k">if</span> <span class="nx">user</span>
+      <span class="nv">auth = </span><span class="k">new</span> <span class="nx">Auth</span><span class="p">()</span>
 
-    <span class="nv">auth = </span><span class="k">new</span> <span class="nx">Auth</span><span class="p">()</span>
+      <span class="k">if</span> <span class="nx">auth</span><span class="p">.</span><span class="nx">validate</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">salt</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">password</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nx">next</span> <span class="nx">user</span>
 
-    <span class="k">if</span> <span class="nx">auth</span><span class="p">.</span><span class="nx">validate</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">salt</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">password</span><span class="p">)</span>
-      <span class="nx">callback</span> <span class="nx">user</span>
-      <span class="k">return</span>
-    <span class="nx">callback</span> <span class="kc">null</span></pre></div></td></tr><tr id="section-4"><td class="docs"><div class="pilwrap"><a href="#section-4" class="pilcrow">&#182;</a></div><h3>Save</h3>
+    <span class="nx">next</span> <span class="kc">null</span></pre></div></td></tr><tr id="section-4"><td class="docs"><div class="pilwrap"><a href="#section-4" class="pilcrow">&#182;</a></div><h3>Save</h3>
 
-<p>Saves the given user to the MongoDB user collection.</p>
-</td><td class="code"><div class="highlight"><pre><span class="nv">save = </span><span class="nf">(user) -&gt;</span>
+<p>Saves the given user to the MongoDB user collection.
+Returns the boolen when is done as next callback.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">save = </span><span class="nf">(user, next) -&gt;</span>
   <span class="nx">user</span><span class="p">.</span><span class="nx">save</span> <span class="nf">(err) -&gt;</span>
-    <span class="k">if</span> <span class="nx">err</span> <span class="k">then</span> <span class="k">throw</span> <span class="nx">err</span> <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s1">&#39;User saved!&#39;</span>
-
-<span class="nv">createDefaultUser = </span><span class="o">-&gt;</span>
-  <span class="nv">user = </span><span class="k">new</span> <span class="nx">User</span>
-  <span class="nv">user.email = </span><span class="s1">&#39;xajler@gmail.com&#39;</span>
-  <span class="nv">user.salt = </span><span class="s1">&#39;T%6ScZmQ&#39;</span>
-  <span class="nv">user.password = </span><span class="s1">&#39;a7caacc44236c74f54571498c33977d3b5f63dec54ae1c095818308607c8302c&#39;</span>
-  <span class="nv">user.firstName = </span><span class="s1">&#39;Kornelije&#39;</span>
-  <span class="nv">user.lastName = </span><span class="s1">&#39;Sajler&#39;</span>
-  <span class="nx">save</span> <span class="nx">user</span>
-
-<span class="nv">users =</span>
-  <span class="s1">&#39;xajler@gmail.com&#39;</span><span class="o">:</span>
-    <span class="nv">email: </span><span class="s1">&#39;xajler@gmail.com&#39;</span>
-    <span class="nv">salt: </span><span class="s1">&#39;T%6ScZmQ&#39;</span>
-    <span class="nv">password: </span><span class="s1">&#39;a7caacc44236c74f54571498c33977d3b5f63dec54ae1c095818308607c8302c&#39;</span></pre></div></td></tr><tr id="section-5"><td class="docs"><div class="pilwrap"><a href="#section-5" class="pilcrow">&#182;</a></div><p>Exports the <code>authenticate</code> function.</p>
-</td><td class="code"><div class="highlight"><pre><span class="nv">module.exports.authenticate = </span><span class="nx">authenticate</span> </pre></div></td></tr><tr id="section-6"><td class="docs"><div class="pilwrap"><a href="#section-6" class="pilcrow">&#182;</a></div><p>Exports the <code>save</code> method.</p>
+    <span class="k">if</span> <span class="nx">err</span> <span class="k">then</span> <span class="nx">next</span> <span class="kc">no</span> <span class="k">else</span> <span class="nx">next</span> <span class="kc">yes</span></pre></div></td></tr><tr id="section-5"><td class="docs"><div class="pilwrap"><a href="#section-5" class="pilcrow">&#182;</a></div><p>Exports <code>findByEmail</code> as module.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">module.exports.findByEmail = </span><span class="nx">findByEmail</span></pre></div></td></tr><tr id="section-6"><td class="docs"><div class="pilwrap"><a href="#section-6" class="pilcrow">&#182;</a></div><p>Exports <code>authenticate</code> as module.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">module.exports.authenticate = </span><span class="nx">authenticate</span></pre></div></td></tr><tr id="section-7"><td class="docs"><div class="pilwrap"><a href="#section-7" class="pilcrow">&#182;</a></div><p>Exports <code>save</code> as module.</p>
 </td><td class="code"><div class="highlight"><pre><span class="nv">module.exports.save = </span><span class="nx">save</span>
-<span class="nv">module.exports.createDefaultUser = </span><span class="nx">createDefaultUser</span>  
 
-</pre></div></td></tr></tbody></table><div id="generated">generated Tue Dec 20 2011 13:41:25 GMT+0100 (CET)  </div><div id="projectname"><a href="../readme.html">Wall Of Tweets</a></div></div></body></html>
+</pre></div></td></tr></tbody></table><div id="generated">generated Thu Jan 12 2012 23:46:53 GMT+0100 (CET)  </div><div id="projectname"><a href="../readme.html">Wall Of Tweets</a></div></div></body></html>

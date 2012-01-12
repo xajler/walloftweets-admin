@@ -15,9 +15,9 @@ describe 'Auth:', ->
   it 'should throw error on create if the password is not given', ->
     auth = new Auth
     err = -> auth.create();
-    err.should.throw() 
+    err.should.throw()
 
-  it 'should validatate salt and password with hashed password', ->
+  it 'should validate salt and password with hashed password', ->
     auth = new Auth
     salt = 'd=-*TQ2='
     hashPassword = '8af891cfa0e7e0e42c199dcba705545dcbe301613a39ab854244d644c7685c6a'

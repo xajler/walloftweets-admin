@@ -5,11 +5,12 @@
 Event = require '../models/event'
 mongoose = require 'mongoose' 
 
-#### Save
+#### save
 # Saves the given event to the MongoDB client collection.
-save = (event) ->
+# Returns the boolen when is done as next callback.
+save = (event, next) ->
   event.save (err) ->
-    if err then throw err else console.log 'Event saved!'
+    if err then next no else next yes
 
 # Exports `save` as module.
 module.exports.save = save

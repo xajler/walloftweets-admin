@@ -16,14 +16,16 @@ User = new Schema(
     validate: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
   #### password
   # Hashed password of salt and password hashed.
-  # `String` type, required, MongoDB index.
+  # `String` type, required.
   password:
     type: String
-    index: true
     required: true
   #### salt
   # The salt for (un)hashing the password.
-  salt: String
+  # `String` type, required.
+  salt: 
+    type: String
+    required: true
   #### firstName
   # `String` type, required, MongoDB index.
   firstName:
@@ -59,19 +61,19 @@ User = new Schema(
     default: false
 )
 
-# Validates that User `fullName` is 32 characters long.
+# Sets the virtual `fullName` to be concationation of `firstName` and `lastName`.
 User.virtual('fullName').get ->
-  this.firstName + this.lastName
+  this.firstName + " " + this.lastName
 
-# Validates that User `email` is 32 characters long.
+# Validates that User `email` is 64 characters long.
 User.path('email').validate (property) ->
-  property.length <= 128
+  property.length <= 64
 
 # Validates that User `firstName` is 32 characters long.
 User.path('firstName').validate (property) ->
   property.length <= 32
 
-# Validates that User `lastName` is 32 characters long.
+# Validates that User `lastName` is 64 characters long.
 User.path('lastName').validate (property) ->
   property.length <= 64
 

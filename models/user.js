@@ -14,10 +14,12 @@
     },
     password: {
       type: String,
-      index: true,
       required: true
     },
-    salt: String,
+    salt: {
+      type: String,
+      required: true
+    },
     firstName: {
       type: String,
       index: true,
@@ -44,11 +46,11 @@
   });
 
   User.virtual('fullName').get(function() {
-    return this.firstName + this.lastName;
+    return this.firstName + " " + this.lastName;
   });
 
   User.path('email').validate(function(property) {
-    return property.length <= 128;
+    return property.length <= 64;
   });
 
   User.path('firstName').validate(function(property) {

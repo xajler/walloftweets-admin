@@ -7,13 +7,13 @@
 express = require 'express'
 require 'express-resource'
 mongooseInit = require './mongoose-init'
-users = require './repositories/users' 
+users = require './repositories/users'
 
 # Creation of server and `app` and export.
-app = module.exports = express.createServer()   
+app = module.exports = express.createServer()
 
 # Connecting to the WallOfTweets MongoDB database.
-mongooseInit.connect();
+mongooseInit.connect()
 
 #### Express Configuration
 # * Cookie parser.

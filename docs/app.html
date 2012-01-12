@@ -9,9 +9,9 @@
 </td><td class="code"><div class="highlight"><pre><span class="nv">express = </span><span class="nx">require</span> <span class="s1">&#39;express&#39;</span>
 <span class="nx">require</span> <span class="s1">&#39;express-resource&#39;</span>
 <span class="nv">mongooseInit = </span><span class="nx">require</span> <span class="s1">&#39;./mongoose-init&#39;</span>
-<span class="nv">users = </span><span class="nx">require</span> <span class="s1">&#39;./repositories/users&#39;</span> </pre></div></td></tr><tr id="section-2"><td class="docs"><div class="pilwrap"><a href="#section-2" class="pilcrow">&#182;</a></div><p>Creation of server and <code>app</code> and export.</p>
-</td><td class="code"><div class="highlight"><pre><span class="nv">app = module.exports = </span><span class="nx">express</span><span class="p">.</span><span class="nx">createServer</span><span class="p">()</span>   </pre></div></td></tr><tr id="section-3"><td class="docs"><div class="pilwrap"><a href="#section-3" class="pilcrow">&#182;</a></div><p>Connecting to the WallOfTweets MongoDB database.</p>
-</td><td class="code"><div class="highlight"><pre><span class="nx">mongooseInit</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span></pre></div></td></tr><tr id="section-4"><td class="docs"><div class="pilwrap"><a href="#section-4" class="pilcrow">&#182;</a></div><h3>Express Configuration</h3>
+<span class="nv">users = </span><span class="nx">require</span> <span class="s1">&#39;./repositories/users&#39;</span></pre></div></td></tr><tr id="section-2"><td class="docs"><div class="pilwrap"><a href="#section-2" class="pilcrow">&#182;</a></div><p>Creation of server and <code>app</code> and export.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nv">app = module.exports = </span><span class="nx">express</span><span class="p">.</span><span class="nx">createServer</span><span class="p">()</span></pre></div></td></tr><tr id="section-3"><td class="docs"><div class="pilwrap"><a href="#section-3" class="pilcrow">&#182;</a></div><p>Connecting to the WallOfTweets MongoDB database.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">mongooseInit</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span></pre></div></td></tr><tr id="section-4"><td class="docs"><div class="pilwrap"><a href="#section-4" class="pilcrow">&#182;</a></div><h3>Express Configuration</h3>
 
 <ul>
 <li>Cookie parser.</li>
@@ -72,4 +72,4 @@ to login page <code>views/login.jade</code>.</p>
 <span class="nx">app</span><span class="p">.</span><span class="nx">listen</span> <span class="mi">3000</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s1">&#39;Express server listening on port %d in %s mode&#39;</span><span class="p">,</span> <span class="nx">app</span><span class="p">.</span><span class="nx">address</span><span class="p">().</span><span class="nx">port</span><span class="p">,</span> <span class="nx">app</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">env</span><span class="p">;</span>
 
-</pre></div></td></tr></tbody></table><div id="generated">generated Tue Dec 20 2011 13:41:24 GMT+0100 (CET)  </div><div id="projectname"><a href="./readme.html">Wall Of Tweets</a></div></div></body></html>
+</pre></div></td></tr></tbody></table><div id="generated">generated Thu Jan 12 2012 23:46:52 GMT+0100 (CET)  </div><div id="projectname"><a href="./readme.html">Wall Of Tweets</a></div></div></body></html>

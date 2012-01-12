@@ -9,9 +9,10 @@ mongoose = require 'mongoose'
 
 #### Save
 # Saves the given client to the MongoDB client collection.
-save = (client) ->
+# Returns the boolen when is done as next callback.
+save = (client, next) ->
   client.save (err) ->
-    if err then throw err else console.log 'Client saved!'
+    if err then next no else next yes
 
 # Exports `save` as module.
 module.exports.save = save

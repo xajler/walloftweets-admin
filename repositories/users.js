@@ -1,5 +1,5 @@
 (function() {
-  var Auth, User, authenticate, mongoose, save;
+  var Auth, User, authenticate, findByEmail, mongoose, save;
 
   Auth = require('../utils/auth');
 
@@ -7,38 +7,38 @@
 
   mongoose = require('mongoose');
 
-  authenticate = function(email, password, callback) {
-    return User.findOne({
-      'email': email
-    }, function(err, user) {
-      var auth;
-      if (err) {
-        console.log(err);
+  findByEmail = function(email, next) {
+    return User.where('email', email).findOne(function(err, user) {
+      if (user) {
+        return next(user);
       } else {
-        console.log(user);
+        return next(null);
       }
-      if (!user) {
-        console.log(email + ' ' + password);
-        callback(null);
-      }
-      auth = new Auth();
-      if (auth.validate(password, user.salt, user.password)) {
-        callback(user);
-        return;
-      }
-      return callback(null);
     });
   };
 
-  save = function(user) {
+  authenticate = function(email, password, next) {
+    return this.findByEmail(email, function(user) {
+      var auth;
+      if (user) {
+        auth = new Auth();
+        if (auth.validate(password, user.salt, user.password)) return next(user);
+      }
+      return next(null);
+    });
+  };
+
+  save = function(user, next) {
     return user.save(function(err) {
       if (err) {
-        throw err;
+        return next(false);
       } else {
-        return console.log('User saved!');
+        return next(true);
       }
     });
   };
+
+  module.exports.findByEmail = findByEmail;
 
   module.exports.authenticate = authenticate;
 

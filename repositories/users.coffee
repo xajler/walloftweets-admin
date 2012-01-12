@@ -7,31 +7,37 @@ Auth = require '../utils/auth'
 User = require '../models/user'
 mongoose = require 'mongoose'
 
+#### FindByEmail
+# Finds the `User` by given email.
+# Returns a `User` as a next callback.
+findByEmail = (email, next) ->
+  User.where('email', email).findOne((err, user) ->
+    if user then next user else next null
+  )
+
 #### Authenticate
 # For given email and password authenticates user aginst MongoDB user collection.
 # Uses `auth` helper utility to hash the password and salt to validate user.  
-# Returns a user as a callback.
-authenticate = (email, password, callback) ->
-  User.findOne 
-    'email': email
-  , (err, user) ->
-    if err then console.log err else console.log user
-    unless user
-      console.log email + ' ' + password
-      callback null
+# Returns a `User` as a next callback.
+authenticate = (email, password, next) ->
+  @findByEmail email, (user) ->
+    if user
+      auth = new Auth()
 
-    auth = new Auth()
+      if auth.validate(password, user.salt, user.password)
+        return next user
 
-    if auth.validate(password, user.salt, user.password)
-      callback user
-      return
-    callback null
+    next null
 
 #### Save
 # Saves the given user to the MongoDB user collection.
-save = (user) ->
+# Returns the boolen when is done as next callback.
+save = (user, next) ->
   user.save (err) ->
-    if err then throw err else console.log 'User saved!'
+    if err then next no else next yes
+
+# Exports `findByEmail` as module.
+module.exports.findByEmail = findByEmail
 
 # Exports `authenticate` as module.
 module.exports.authenticate = authenticate

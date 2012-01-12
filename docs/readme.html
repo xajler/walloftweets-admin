@@ -1,11 +1,56 @@
 <!DOCTYPE html><html><head><title>README</title><meta http-equiv="Content-Type" content="text/html" charset="UTF-8"><link rel="stylesheet" media="all" href="./docco.css"></head><body><div id="container"><div id="background"></div><div id="jump_to">Jump To &hellip;<div id="jump_wrapper"><div id="jump_page"><a href="./readme.html" class="source"><span class="file_name">README</span></a><a href="././app.html" class="source "><span class="base_path">. / </span><span class="file_name">app.coffee</span></a><a href="./models/client.html" class="source "><span class="base_path">models / </span><span class="file_name">client.coffee</span></a><a href="./models/event.html" class="source "><span class="base_path">models / </span><span class="file_name">event.coffee</span></a><a href="./models/language.html" class="source "><span class="base_path">models / </span><span class="file_name">language.coffee</span></a><a href="./models/moderation-bucket.html" class="source "><span class="base_path">models / </span><span class="file_name">moderation-bucket.coffee</span></a><a href="./models/moderation.html" class="source "><span class="base_path">models / </span><span class="file_name">moderation.coffee</span></a><a href="./models/user.html" class="source "><span class="base_path">models / </span><span class="file_name">user.coffee</span></a><a href="././mongoose-init.html" class="source "><span class="base_path">. / </span><span class="file_name">mongoose-init.coffee</span></a><a href="./repositories/users.html" class="source "><span class="base_path">repositories / </span><span class="file_name">users.coffee</span></a><a href="./utils/auth.html" class="source "><span class="base_path">utils / </span><span class="file_name">auth.coffee</span></a></div></div></div><table cellpadding="0" cellspacing="0"><thead><tr><th class="docs"></th><th class="code"></th></tr></thead><tbody><tr id="section"><td class="docs"><h1><a href="http://walloftweets.net">WallOfTweets
-</a></h1><p>UXPassion - Wall Of Tweets</p><h3>Version</h3><p>0.0.2</p><h3>Author</h3><p><span class="gravatar"><img src="http://www.gravatar.com/avatar/4e0d581521137646abac17331917e95e"/><span>Kornelije Sajler&lt;xajler@gmail.com&gt;</span></span></p><h3>Repository</h3><p>git - https://bitbucket.org/xajler/walloftweets.git</p><h3>Dependencies </h3><ul><li><b>express </b><span>&gt;= 2.5.2</span></li><li><b>jade </b><span>&gt;= 0.19</span></li><li><b>express-resource </b><span>&gt;= 0.2.3</span></li><li><b>mongoose </b><span>&gt;= 2.x</span></li><li><b>coffee-script </b><span>&gt;= 1.x</span></li></ul><p><h3>Stats</h3><pre class="code_stats">
-http://cloc.sourceforge.net v 1.55  T=0.5 s (20.0 files/s, 1438.0 lines/s)
+</a></h1><p>UXPassion - Wall Of Tweets</p><h3>Version</h3><p>0.0.4</p><h3>Author</h3><p><span class="gravatar"><img src="http://www.gravatar.com/avatar/4e0d581521137646abac17331917e95e"/><span>Kornelije Sajler&lt;xajler@gmail.com&gt;</span></span></p><h3>Repository</h3><p>git - https://bitbucket.org/xajler/walloftweets.git</p><h3>Dependencies </h3><ul><li><b>express </b><span>&gt;= 2.5.2</span></li><li><b>jade </b><span>&gt;= 0.19</span></li><li><b>express-resource </b><span>&gt;= 0.2.3</span></li><li><b>mongoose </b><span>&gt;= 2.x</span></li><li><b>coffee-script </b><span>&gt;= 1.x</span></li></ul><p><h3>Stats</h3><pre class="code_stats">
+http://cloc.sourceforge.net v 1.55  T=0.5 s (20.0 files/s, 1392.0 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-CoffeeScript                    10             80            280            359
+CoffeeScript                    10             75            281            340
 -------------------------------------------------------------------------------
-SUM:                            10             80            280            359
+SUM:                            10             75            281            340
 -------------------------------------------------------------------------------
-</pre></p></td><td id="content" class="code"><p>There is no README.md for this project yet :( </p>  </td></tr></tbody></table><div id="generated">generated Tue Dec 20 2011 13:41:24 GMT+0100 (CET)  </div><div id="projectname"><a href="./readme.html">Wall Of Tweets</a></div></div></body></html>
+</pre></p></td><td id="content" class="code"><h1>Release Notes</h1>
+
+<h2>v0.0.3</h2>
+
+<ul>
+<li>Fixed issue with <em>mongoose-int</em>.</li>
+<li>Created <em>fake-data</em> generator of fake data for now one user, client and two events for this user/client.</li>
+<li>Models now <em>exports</em> <em>Mongoose</em> <em>model</em> instead of <em>Schema</em> and creating <em>model</em> in <em>repositories</em>.</li>
+<li>For <em>user</em> and <em>client</em> model now is used <em>Mongoose</em> shorthand for unique index "<em>unique: true</em>".</li>
+<li>From <em>event</em> model removed exports for <em>tweeple</em>, <em>words</em> and <em>phrase</em>.</li>
+<li>In <em>event</em> model changed references to <em>user</em> and <em>client</em> with <em>Mongoose</em>  <em>type</em> + <em>ref</em>.</li>
+<li>Created in <em>repositories</em> <em>events</em> with only one exported module function <em>save</em>.</li>
+<li>Fake functions from <em>repositories</em> folder for <em>users</em>, <em>clients</em>, <em>events</em> moved to <em>fake-data</em>.</li>
+<li>Changed <em>start.sh</em> to include <em>fake-data</em> in <em>CoffeScript</em> watch and compile.</li>
+</ul>
+
+<h2>v0.0.2 Added Docco Documentation and Mocha Testing</h2>
+
+<ul>
+<li>A Docco-Huskey Documentation for all serverside *.coffee files except test.</li>
+<li>Documentation is in <em>doc</em> folder.</li>
+<li>Test folder renamed from "<em>tests</em>" to "<em>test</em>".</li>
+<li><a href="http://visionmedia.github.com/mocha/"><em>Mocha</em></a> is used for <em>BDD</em> testing with <a href="https://github.com/visionmedia/should.js"><em>should.js</em></a>.</li>
+<li><em>auth.test.js</em> is converted from <em>Expresso</em> to <em>Mocha</em>.</li>
+<li>"<em>auth.test.js</em>" is converted to <em>CoffeeScript</em> and renamed simply to <em>auth.coffee</em>.</li>
+<li>Since the <em>Mocha</em> supports <em>CoffeeScript</em> there is no <em>auth.js</em> in test.</li>
+<li>Created <em>Makefile</em> for <em>Mocha</em> test settings and test are invoked with command <em>make test</em>.</li>
+<li>Mostly all of models didn't have export of themselves so it is fixed now.</li>
+<li>Added <em>mongoose-init</em>, a singleton called in <em>App</em> that connects to <em>MongoDB</em>, so there is no more need for connecting each time the <em>MongoDB</em> when connection is needed.</li>
+<li><em>Package.json</em> updated with updated dependencies.</li>
+<li>Application now uses <em>Node</em> <em>v0.6.6</em>.</li>
+<li>There is <em>msg.md</em> for git commit messages invoked with command "<em>git commit -F msg.md</em>".</li>
+<li><em>msg.md</em> is put in <em>.gitignore</em> there is no need for this message to be part of source control.</li>
+<li>Added README.md to contain <em>Relese Notes</em> of relevant commit messages.</li>
+</ul>
+
+<h2>v0.0.1 Major changes and UI Improvements</h2>
+
+<ul>
+<li>Added images and stylesheet for login and general UI.</li>
+<li>Used <em>Require.js</em> for JavaScript dependencies.</li>
+<li>Used Backbone.js with <em>Underscore.js</em> with <em>Require.js</em>.</li>
+<li><em>layout.jade</em> is having a user full name link with logout link.</li>
+<li>Added menu navigation with "<em>Events</em>", "<em>Moderation</em>", "<em>Phrases</em>", "<em>Tweeple</em>", for now hardcoded, and only "<em>/events</em>" route is functional right now.</li>
+<li>There are some JavaScripts not converted to <em>CoffeScript</em> but mayor are.</li>
+</ul>  </td></tr></tbody></table><div id="generated">generated Thu Jan 12 2012 23:46:51 GMT+0100 (CET)  </div><div id="projectname"><a href="./readme.html">Wall Of Tweets</a></div></div></body></html>

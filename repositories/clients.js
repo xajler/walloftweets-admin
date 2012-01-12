@@ -7,12 +7,12 @@
 
   mongoose = require('mongoose');
 
-  save = function(client) {
+  save = function(client, next) {
     return client.save(function(err) {
       if (err) {
-        throw err;
+        return next(false);
       } else {
-        return console.log('Client saved!');
+        return next(true);
       }
     });
   };
