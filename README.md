@@ -1,5 +1,11 @@
 # Release Notes
 
+## v0.0.4
+
+* Created all authentication tests for _User Model_, _Auth_ and _User Repositories_
+* Updated and created new docs
+* Updated models and repositories the save now has callback and User has findByEmail
+
 ## v0.0.3 
 
 * Fixed issue with _mongoose-int_.
