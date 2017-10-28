@@ -23,7 +23,7 @@
 * A Docco-Huskey Documentation for all serverside *.coffee files except test.
 * Documentation is in _doc_ folder.
 * Test folder renamed from "_tests_" to "_test_".
-* [_Mocha_](http://visionmedia.github.com/mocha/) is used for _BDD_ testing with [_should.js_](https://github.com/visionmedia/should.js).
+* [_Mocha_](http://mochajs.org/) is used for _BDD_ testing with [_should.js_](https://github.com/visionmedia/should.js).
 * _auth.test.js_ is converted from _Expresso_ to _Mocha_.
 * "_auth.test.js_" is converted to _CoffeeScript_ and renamed simply to _auth.coffee_.
 * Since the _Mocha_ supports _CoffeeScript_ there is no _auth.js_ in test.
